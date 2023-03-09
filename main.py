@@ -118,31 +118,55 @@ async def Opcua_using_async():
                 
                 print("Getting Machine parameters from MachineData")
 
+                # Can place it later in an apart class, calles like MachineDataStructs
+
                 #f80001
                 struct1 =  client.get_node("ns=2;i=117622")
-                #data = await client.load_type_definitions()  
-                # scan server for custom structures and import them. legacy code
-                data1 = await client.load_data_type_definitions() 
-                # scan server for custom structures and import them
                 f80001_value = await struct1.read_value()
-
 
                 #f9000
                 struct2 =  client.get_node("ns=2;i=117672")
-                #data = await client.load_type_definitions()  
-                # scan server for custom structures and import them. legacy code
-                data2 = await client.load_data_type_definitions() 
-                # scan server for custom structures and import them
                 ff9000_value = await struct2.read_value()
 
 
                 #f9000A
                 struct3 =  client.get_node("ns=2;i=117682")
-                #data = await client.load_type_definitions()  
-                # scan server for custom structures and import them. legacy code
-                data3 = await client.load_data_type_definitions() 
-                # scan server for custom structures and import them
                 f9000A_value = await struct3.read_value()
+
+                #f9001
+                struct4 =  client.get_node("ns=2;i=117692")
+                f9001_value = await struct4.read_value()
+
+                #f9002
+                struct5 =  client.get_node("ns=2;i=117692")
+                f9002_value = await struct5.read_value()
+
+                #t007
+                struct6 =  client.get_node("ns=2;i=117522")
+                t007_value = await struct6.read_value()
+
+                #t008
+                struct7 =  client.get_node("ns=2;i=117532")
+                t008_value = await struct7.read_value()
+
+                #t009
+                struct8 =  client.get_node("ns=2;i=117532")
+                t009_value = await struct8.read_value()
+
+                #t010
+                struct9 =  client.get_node("ns=2;i=117552")
+                t010_value = await struct9.read_value()
+
+                #t9000
+                struct10 =  client.get_node("ns=2;i=117572")
+                t9000_value = await struct10.read_value()
+
+
+
+
+
+
+
 
                 #We have ur label 
 
@@ -150,13 +174,13 @@ async def Opcua_using_async():
                 data = [["f80001", f80001_value, " "], 
                         ["f9000", ff9000_value," "], 
                         ["f9000A", f9000A_value," "], 
-                        ["f9001", 88," "],
-                        ["f9002", 88," "],
-                        ["t007", 88," "],
-                        ["t007", 88," "],
-                        ["t008", 88," "],
-                        ["t009", 88," "],
-                        ["t0010", 88," "],
+                        ["f9001", f9001_value," "],
+                        ["f9002", f9002_value," "],
+                        ["t007", t007_value," "],
+                        ["t007", t008_value," "],
+                        ["t008", t009_value," "],
+                        ["t009", t010_value," "],
+                        ["t0010", t9000_value," "],
                         ["t9000", 88," "],
                         ["t9001", 88," "],
                         ["t9002", 88," "],
@@ -164,13 +188,15 @@ async def Opcua_using_async():
 
                 #define header names
                 col_names = ["f-value", "Value", "Description-level-higher"]
-
+                #tabelValue = tabulate(data, headers=col_names)
                 #display 
                 print("Parameters inside MachineData")
-                print(tabulate(data, headers=col_names))
+                #print(tabulate(data, headers=col_names))
 
                 #Getting the data every 10 seconds 
                 sleep(0.5)
+
+                sg.popup(tabulate(data, headers=col_names))
                 #client.disconnect()
 
 
@@ -198,7 +224,7 @@ async def Opcua_using_async():
             sleep(1)
              #display 
             print("Parameters inside MachineData")
-            print(tabulate(data, headers=col_names))
+           
     
 
 sg.theme('DarkAmber')   # Add a touch of color
@@ -216,6 +242,7 @@ layout = [
   [sg.Text('Enter the endpoint address'), sg.InputText('opc.tcp://10.210.40.215:4880/Arburg')],
   [sg.Text('Enter username'), sg.InputText('host_computer')],
   [sg.Text('Enter password'), sg.InputText('')],
+  [sg.Multiline(size=(30, 5), key='textbox')],  # identify the multiline via key option
   [sg.Button('connect'), sg.Button('Cancel')],
   #[sg.Tab('Console', tab1_layout)]
 ]
@@ -252,6 +279,7 @@ while True:
             #Trying to fix an bug 
             asyncio.get_event_loop().run_until_complete(Opcua_using_async())
             print("Connect test")
+            
 
     
     #Only run ocua function if i get the addresses first

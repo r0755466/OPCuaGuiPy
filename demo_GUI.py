@@ -46,7 +46,7 @@ def make_window(theme):
                [sg.ProgressBar(100, orientation='h', size=(20, 20), key='-PROGRESS BAR-'), sg.Button('Test Progress bar')]]
 
     logging_layout = [[sg.Text("Anything printed will display here!")],
-                      [sg.Multiline(size=(60,15), font='Courier 8', expand_x=True, expand_y=True, write_only=True,
+                      [sg.Multiline(size=(60,15), font='Courier 8', expand_x=True, expand_y=True, write_only=False,
                                     reroute_stdout=True, reroute_stderr=True, echo_stdout_stderr=True, autoscroll=True, auto_refresh=True)]
                       # [sg.Output(size=(60,15), font='Courier 8', expand_x=True, expand_y=True)]
                       ]
@@ -55,6 +55,7 @@ def make_window(theme):
                       [sg.Graph((200,200), (0,0),(200,200),background_color="black", key='-GRAPH-', enable_events=True,
                                 right_click_menu=graph_right_click_menu_def)],
                       [sg.T('Click anywhere on graph to draw a circle')],
+                      
                       [sg.Table(values=data, headings=headings, max_col_width=25,
                                 background_color='black',
                                 auto_size_columns=True,
