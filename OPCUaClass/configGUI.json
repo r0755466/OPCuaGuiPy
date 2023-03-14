@@ -1,0 +1,28 @@
+{
+   "data": [
+      {
+         "name": "opc.tcp://10.210.40.215:4880/Arburg",
+         "user": "host_computer",
+         "pass": " ",
+         "server-name": "Arburg1",
+         "groupname": " Arburg",
+         "id": 270693355111457007
+      },
+      {
+         "name": "opc.tcp://10.210.40.215:4880/Arburg",
+         "user": "host_computer",
+         "pass": " ",
+         "server-name": " ",
+         "groupname": " ",
+         "id": 225596124187060104
+      },
+      {
+         "name": "opc.tcp://10.210.40.215:4880/Arburg",
+         "user": "host_computer",
+         "pass": " ",
+         "server-name": " ",
+         "groupname": " ",
+         "id": 804393389031193175
+      }
+   ]
+}

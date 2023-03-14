@@ -1,0 +1,18 @@
+http://freeopcua.github.io/
+https://python-opcua.readthedocs.io/en/latest/_modules/opcua/client/client.html#Client.load_private_key
+https://github.com/FreeOpcUa/opcua-client-gui
+https://github.com/FreeOpcUa/python-opcua/issues/916
+https://github.com/FreeOpcUa/python-opcua/blob/master/examples/generate_certificate.sh
+https://slproweb.com/products/Win32OpenSSL.html
+
+// Verband met software keuze
+https://s2labs.org/download/publications/2020_ETFA_Open-Source_OPC-UA.pdf
+https://github.com/FreeOpcUa/python-opcua/issues/1122
+
+
+//json 
+https://www.freecodecamp.org/news/build-a-simple-json-api-in-python/
+
+
+// Gui Zelf 
+https://www.pysimplegui.org/en/latest/#button-element

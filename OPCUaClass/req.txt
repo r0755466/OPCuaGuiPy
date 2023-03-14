@@ -1,0 +1,6 @@
+ipython
+python-time
+PySimpleGUI
+asyncio
+tabulate
+pysondb
