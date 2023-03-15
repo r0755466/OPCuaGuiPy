@@ -117,14 +117,15 @@ logging_layout = [[sg.Multiline(size=(30, 5), key='-pop up-')]
 
 layout +=[[sg.TabGroup([[      
                     sg.Tab('Connection1', layout1),
-                    sg.Tab('Connection2', layout2),
-                    sg.Tab('connection3', layout3),
-                    sg.Tab('Output', logging_layout)]], key='-pop up-', expand_x=True, expand_y=True),
+                    sg.Tab('Output', logging_layout)
+
+                    ]], key='-pop up-', expand_x=True, expand_y=True),
+                    
                     ]]
 # Maybe can use it later pysondb convert --c file.csv --d file.json
 
 # Create the Window
-window = sg.Window('Opcua client app', layout)
+window = sg.Window('Opcua client app', layout, resizable=True, finalize=True)
 
 # Event Loop to process "events" and get the "values" of the inputs
 while True:

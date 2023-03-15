@@ -16,3 +16,12 @@ https://www.freecodecamp.org/news/build-a-simple-json-api-in-python/
 
 // Gui Zelf 
 https://www.pysimplegui.org/en/latest/#button-element
+
+# Writing to an file 
+https://www.w3schools.com/python/python_file_write.asp
+
+// Writing 
+https://www.youtube.com/watch?v=5hTWdnFz2Ts
+
+// Tabel 
+https://github.com/amithr/PySimpleGUI-Editable-Table/blob/main/main.py

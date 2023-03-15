@@ -62,7 +62,7 @@ _logger = logging.getLogger(__name__)
     """
 
 class Connection:
-        async def Opcua_using_async(end, user, user_pass):  
+        async def Opcua_using_async(end, user, user_pass, ns0, ns1, ns2, ns3):  
             #handler = subhandler.subHandler()
 
             #How much do i wanna wait before to read the data
@@ -132,6 +132,13 @@ class Connection:
 
                         #We have ur label 
                         #Create data
+
+
+                        # Tabel herbruiken, de structuur. Dan kan je het veranderen. 
+                        # Manueel invoegen: 
+                        # Manueel, meerdere variables herhalend voor uitbreding. 
+
+
                         data = [["f80001", f80001_value, " "], 
                                 ["f9000", ff9000_value," "], 
                                 ["f9000A", f9000A_value," "], 
@@ -149,7 +156,6 @@ class Connection:
 
                         # Save in an database under the name: 
                         
-
 
                         #define header names
                         col_names = ["f-value", "Value", "Description-level-higher"]

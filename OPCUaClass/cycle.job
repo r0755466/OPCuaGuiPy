@@ -1,0 +1,17 @@
+JOB pd RESPONSE "\EM63\M223\cycle.job\pd.log";
+
+REPORT spc
+APPEND "\EM63\M223\cycle.job\spc.dat" 
+
+START IMMEDIATE
+STOP NEVER
+CYCLIC SHOT 1
+SESSIONS 1000
+
+PARAMETERS
+DATE,
+TIME,
+COUNT,
+ActCntCyc,
+ActCntCYCRej,
+ActFrcClp;
