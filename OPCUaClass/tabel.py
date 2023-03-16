@@ -26,6 +26,8 @@ from pysondb import db
 
 import array
 
+
+
 # Log in with password and encryt ? 
 # To make safe the data 
 
@@ -87,6 +89,7 @@ layout1 = [
   [sg.Text('Enter password'), sg.InputText(user_pas1)],
   [sg.Button('connect'), sg.Button('Cancel')],
 ]
+
 
 
 # Maybe can use it later pysondb convert --c file.csv --d file.json
@@ -171,19 +174,52 @@ def edit_cell(window, key, row, col, justify='left'):
 
         return text
 
-
 #Tabel headings 
-headings = ['GroupName', 'Protocol', 'endpoint', 'user', 'pass','ns1','ns2','ns3']
+# 71 values until ns71
 
-# Data we can get out of the function
-# We can add functions like connectios successfull and expetions 
+# Auto fill 
+# For lus 
 
+# What if we wanna expand the tabel ? 
+
+# Making tabel dimensions 
+
+# Wanna do it only once 
+def read_csv_file(): 
+    # using loadtxt()
+    # first colum 
+    browsername = np.loadtxt("dataSS.csv",delimiter=";", dtype=str, usecols= (0))
+    print(browsername)
+    # 2nd colum 
+    namespace = np.loadtxt("dataSS.csv",delimiter=";", dtype=str, usecols= (1))
+    print(namespace)
+    # 3nd colum 
+    description = np.loadtxt("dataSS.csv",delimiter=";", dtype=str, usecols= (2))
+    print(description)
+
+    namespacedata = np.array(namespace)
+    # Save all the resuts in an function 
+    # We reasamble in an new tabel description + value, we export the tabel 
+
+
+headings = ['GroupName', 'Protocol', 'endpoint', 'user', 'pass', 'csv-file-with-addresses' ]
+
+# 4 * 6 = 24 
 data = [
     ['Jeff', '1X546J', 'Jeff', '1X546J','Jeff', '1X546J','Jeff', '1X546J'],
     ['Jeff', '1X546J', 'Jeff', '1X546J','Jeff', '1X546J','Jeff', '1X546J'],
     ['Jeff', '1X546J', 'Jeff', '1X546J','Jeff', '1X546J','Jeff', '1X546J'],
     ['Jeff', '1X546J', 'Jeff', '1X546J','Jeff', '1X546J','Jeff', '1X546J']
 ]
+
+
+# Data we can get out of the function
+# We can add functions like connectios successfull and expetions 
+# Saving all the data in one array ??
+# We load from an csv all the 
+#We wanna add 71 x ns(n), we iterate the number behindn we add it into headings 
+
+
 
 def load_config(): 
     # Only onces on the beginning 
@@ -218,12 +254,9 @@ def my_parser(id_json):
         value = ''.join(vv)
         return r , c , value 
 
-
 def main():
-
     global edit 
     edit = False
-
     sg.set_options(dpi_awareness=True)
 
     layout = [
@@ -248,7 +281,7 @@ def main():
                         enable_click_events=True,  # Comment out to not enable header and other clicks
                         )],
 
-              [sg.Text('Cell clicked:'), sg.T(key='-CLICKED_CELL-')]]
+              [sg.Text('Cell clicked:'), sg.T(key='-CLICKED_CELL-')], [sg.Button('connect'), sg.Button('Cancel')],]
     
     logging_layout = [[sg.Multiline(size=(30, 5), key='-pop up-')]
     ]  # identify the multiline via key option
@@ -299,7 +332,9 @@ def main():
             # 36 slotten 
             # Aanvullen met de id om data te kunnen opslaan per venster
             # Wil ik per venster ?? 
-            
+
+            # 4 * 6 
+
             save_config(row, col, cell_data, 150308794076421552)
             save_config(row, col, cell_data, 150308794076421552)
             save_config(row, col, cell_data, 556803059551467806)
@@ -336,29 +371,8 @@ def main():
             save_config(row, col, cell_data, 223225519456388549)
             save_config(row, col, cell_data, 223225519456388549)
             
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
+           
 
-            
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-
-
-
-
-        
         elif values[0] == 'certificate':
             sg.popup('Menu item chosen', values[0])
             path_certificate = sg.popup_get_file('Please enter a file name')
@@ -376,6 +390,8 @@ def main():
         elif event == "connect": 
             if __name__ == "__main__":
                 logging.basicConfig(level=logging.INFO)
+
+                asyncio.get_event_loop().run_until_complete(Connection.Get_all_data(endpoint1, username1, user_pas1, "dataSS.csv"))
                 #Trying to fix an bug 
                 #We want to make multiple connextions for examle 3, but everytime we press on connection 
                 #We wanna decide what the hardcoded amount is ... 
@@ -386,27 +402,30 @@ def main():
                 # Like Arburg -> properties -> connection , we get a table back as response
 
                 # Make an function for multiple connections 
-                if values["-AmountConnnection-"] == "Mange first connection":
+                #if values["-AmountConnnection-"] == "Mange first connection":
                     # Want to add the first config 
                     #a.add({"name":endpoint1, "user":username1, "pass":user_pas1, "server-name":servername, "groupname":groupname})
-
-                    # We update an exsisting saved config / load if there is none typed
-                    a.updateById("270693355111457007",{"name":values[3]})
-                    a.updateById("270693355111457007",{"user":values[4]})
-                    a.updateById("270693355111457007",{"server-name":values[1]})
-                    a.updateById("270693355111457007",{"groupname":values[2]})
-
-                    tabelC1 = asyncio.get_event_loop().run_until_complete(Connection.Opcua_using_async(endpoint1, username1, user_pas1))
-                    sg.popup(tabelC1)
-                
-                elif values["-AmountConnnection-"] == "Mange second connections":
+                       
+                            # We update an exsisting saved config / load if there is none typed
+                            #a.updateById("270693355111457007",{"name":values[3]})
+                            #a.updateById("270693355111457007",{"user":values[4]})
+                            #a.updateById("270693355111457007",{"server-name":values[1]})
+                            #a.updateById("270693355111457007",{"groupname":values[2]})
+                       
+                   # print("wait")
+                    #tabelC1 = asyncio.get_event_loop().run_until_complete(Connection.Opcua_using_async(endpoint1, username1, user_pas1))
+                    #sg.popup(tabelC1)
+          
+            
+                if values["-AmountConnnection-"] == "Mange second connections":
                     # Want to add the first config 
                     #a.add({"name":endpoint2, "user":username2, "pass":user_pas2, "server-name":servername2, "groupname":groupname2})
-                    tabelC1 = asyncio.get_event_loop().run_until_complete(Connection.Opcua_using_async(endpoint1, username1, user_pas1))
-                    sg.popup(tabelC1)
+                   
+                    print("Second")
+                    #tabelC1 = asyncio.get_event_loop().run_until_complete(Connection.Opcua_using_async(endpoint1, username1, user_pas1))
+                    #sg.popup(tabelC1)
 
         # Make this function return the new array 
-        
       
     
         elif event == "cancel":
@@ -422,15 +441,12 @@ def main():
             print('Trying an connextion with the next parameters : ', values[1], values[2], values[3], path_certificate, path_key)
 
        
-
     #sg.popup('Results', 'The value returned from popup_get_file', text)
     print('values 1 ', values[1])
     print('Value 2 ', values[2])
     print('value 3 ', values[3])
     print('value 4 ', values[4])
     print('Data', data)
-
-
 
     window.close()
 

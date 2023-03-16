@@ -16,6 +16,7 @@ from IPython import embed
 
 from tabulate import tabulate
 
+import numpy as np 
 #from subhandler import subHandler
 
 _logger = logging.getLogger(__name__)
@@ -62,7 +63,7 @@ _logger = logging.getLogger(__name__)
     """
 
 class Connection:
-        async def Opcua_using_async(end, user, user_pass, ns0, ns1, ns2, ns3):  
+        async def Opcua_using_async(end, user, user_pass):  
             #handler = subhandler.subHandler()
 
             #How much do i wanna wait before to read the data
@@ -89,8 +90,8 @@ class Connection:
                         print("Getting Machine parameters from MachineData")
 
                         # Can place it later in an apart class, calles like MachineDataStructs
-
-                        #f80001
+    
+                               #f80001
                         struct1 =  client.get_node("ns=2;i=117622")
                         f80001_value = await struct1.read_value()
 
@@ -176,11 +177,11 @@ class Connection:
 
                     #Read it making an request 
                     #For the moment it is hard coded to have an structure 
-                        
+                       
 
-                    """while True:
+                    while True:
                             #Change to 10 seconds 
-                            #sleep(1)
+                            sleep(1)
 
                             #We just wanna disconnect 
                             #client.disconnect()  # Throws a exception if connection is lost"""
@@ -194,11 +195,106 @@ class Connection:
                     sleep(1)
                     #display 
             
-
-
             return tabel
-        
 
+        async def Get_all_data(end, user, user_pass, file_address):
+            
+            def get_namespacedata(file_address): 
+                    dotcomma = []
+                    quotionmarks = []
+                    namespace = np.loadtxt(file_address,delimiter=";", dtype=str, usecols= (1))
+                    indexNf = np.loadtxt(file_address,delimiter=";", dtype=str, usecols= (2))
 
+                    namespacedata = np.array(namespace)
+                    indexNfdata = np.array(indexNf)
+                    # We need to fill an array with lenght namespacedata with ; 
+                    for i in range(indexNfdata.size):
+                        dotcomma.append(";")
+                        #print(dotcomma)
 
+                
+                    for q in range(indexNfdata.size):
+                        quotionmarks.append('"')
+                        #print(dotcomma)
 
+                    first = np.core.defchararray.add(quotionmarks,namespacedata)
+                    sumdata = np.core.defchararray.add(first,dotcomma)
+                    last = np.core.defchararray.add(sumdata,indexNfdata)
+                    Result = np.core.defchararray.add(last,quotionmarks)
+
+                    # No quatations 
+                    qua = np.core.defchararray.add(namespacedata, dotcomma )
+                    qua1 = np.core.defchararray.add(qua,indexNfdata)
+
+                    np.char.strip(qua1)
+                   
+                    #print(namespace, indexNfdata, Result)
+                    list_qua1 = qua1.tolist()
+                   # print(list_qua1) 
+
+                    return list_qua1
+
+            ReadEvery = 10
+            ReadStatus = True
+            
+            input_ns = get_namespacedata(file_address)
+
+            while ReadStatus:
+                client = Client(url=end)
+                # client = Client(url="opc.tcp://localhost:53530/OPCUA/SimulationServer/")
+
+                # We need to set the user and password for verification
+                client.set_user(user)
+                client.set_password(user_pass)
+
+                #Can connect and get the datum
+                try:
+                    async with client:
+                        _logger.warning("Connected")
+                        #subscription = await client.create_subscription(500, handler)
+                        #Scan the server for structures: 
+                        
+                        print("Getting Machine parameters from MachineData")
+
+                        # Can place it later in an apart class, calles like MachineDataStructs
+
+                        print(input_ns)
+
+                    
+                        for i in range(71):
+                            Result_ns = []
+
+                            # 23 of 71 = 23/71 are unreable 
+                            if i == 6 or i == 9 or i == 10 or i == 11 or i == 18 or i == 26 or i == 27 or i == 28 or i == 29 or i == 56 or i == 57 or i == 58 or i == 59 or i == 60 or i == 61 or i == 62 or i == 63 or i == 64 or i == 66  or i == 67  or i == 68  or i == 69  or i == 70 :
+                                continue
+
+                            struct = client.get_node(input_ns[i])
+                            sleep(0.1)
+                            Value_ = await struct.read_value()
+                            
+                            print(i , input_ns[i], Value_)
+
+               
+                            # We add the value 
+                         
+                   
+                        print(Result_ns)
+                    
+
+                    while True:
+                            #Change to 10 seconds 
+                            sleep(1)
+
+                            #We just wanna disconnect 
+                            #client.disconnect()  # Throws a exception if connection is lost"""
+
+                        #To get out of the while    
+
+                    ReadStatus = False
+                    
+                except (ConnectionError, ua.UaError):
+                    sleep(1)
+                    #display 
+
+               # return tabel
+                
