@@ -19,6 +19,10 @@ from tabulate import tabulate
 import numpy as np 
 #from subhandler import subHandler
 
+import math 
+
+import pandas as pd
+import numpy as np
 _logger = logging.getLogger(__name__)
 
 
@@ -204,9 +208,11 @@ class Connection:
                     quotionmarks = []
                     namespace = np.loadtxt(file_address,delimiter=";", dtype=str, usecols= (1))
                     indexNf = np.loadtxt(file_address,delimiter=";", dtype=str, usecols= (2))
+                    description = np.loadtxt(file_address,delimiter=";", dtype=str, usecols= (3))
 
                     namespacedata = np.array(namespace)
                     indexNfdata = np.array(indexNf)
+                    descrdata = np.array(description)
                     # We need to fill an array with lenght namespacedata with ; 
                     for i in range(indexNfdata.size):
                         dotcomma.append(";")
@@ -230,71 +236,82 @@ class Connection:
                    
                     #print(namespace, indexNfdata, Result)
                     list_qua1 = qua1.tolist()
+                    listdescr = descrdata.tolist()
                    # print(list_qua1) 
-
-                    return list_qua1
+                    size_ = indexNfdata.size
+                    return list_qua1, listdescr, size_, dotcomma
 
             ReadEvery = 10
             ReadStatus = True
             
-            input_ns = get_namespacedata(file_address)
+            input_ns, input_ds, size_, dotcomma = get_namespacedata(file_address)
 
             while ReadStatus:
-                client = Client(url=end)
-                # client = Client(url="opc.tcp://localhost:53530/OPCUA/SimulationServer/")
+                    client = Client(url=end)
+                    # client = Client(url="opc.tcp://localhost:53530/OPCUA/SimulationServer/")
 
-                # We need to set the user and password for verification
-                client.set_user(user)
-                client.set_password(user_pass)
+                    # We need to set the user and password for verification
+                    client.set_user(user)
+                    client.set_password(user_pass)
 
-                #Can connect and get the datum
-                try:
-                    async with client:
-                        _logger.warning("Connected")
-                        #subscription = await client.create_subscription(500, handler)
-                        #Scan the server for structures: 
-                        
-                        print("Getting Machine parameters from MachineData")
-
-                        # Can place it later in an apart class, calles like MachineDataStructs
-
-                        print(input_ns)
-
-                    
-                        for i in range(71):
-                            Result_ns = []
-
-                            # 23 of 71 = 23/71 are unreable 
-                            if i == 6 or i == 9 or i == 10 or i == 11 or i == 18 or i == 26 or i == 27 or i == 28 or i == 29 or i == 56 or i == 57 or i == 58 or i == 59 or i == 60 or i == 61 or i == 62 or i == 63 or i == 64 or i == 66  or i == 67  or i == 68  or i == 69  or i == 70 :
-                                continue
-
-                            struct = client.get_node(input_ns[i])
-                            sleep(0.1)
-                            Value_ = await struct.read_value()
+                    #Can connect and get the datum
+                    try:
+                        async with client:
+                            _logger.warning("Connected")
+                            #subscription = await client.create_subscription(500, handler)
+                            #Scan the server for structures: 
                             
-                            print(i , input_ns[i], Value_)
+                            print("Getting Machine parameters from MachineData")
 
-               
-                            # We add the value 
-                         
-                   
-                        print(Result_ns)
-                    
+                            # Can place it later in an apart class, calles like MachineDataStructs
 
-                    while True:
-                            #Change to 10 seconds 
-                            sleep(1)
+                            #print(input_ns)
 
-                            #We just wanna disconnect 
-                            #client.disconnect()  # Throws a exception if connection is lost"""
+                            ouput = []
 
-                        #To get out of the while    
+                            for i in range(size_):
 
-                    ReadStatus = False
-                    
-                except (ConnectionError, ua.UaError):
-                    sleep(1)
-                    #display 
+                                # 23 of 71 = 23/71 are unreable 
+                                if i == 6 or i == 9 or i == 10 or i == 11 or i == 18 or i == 26 or i == 27 or i == 28 or i == 29 or i == 56 or i == 57 or i == 58 or i == 59 or i == 60 or i == 61 or i == 62 or i == 63 or i == 64 or i == 66  or i == 67  or i == 68  or i == 69  or i == 70:
+                                    ouput.append("none")
+                                    continue
 
-               # return tabel
+                                struct = client.get_node(input_ns[i])
+                                data_struct= await struct.read_value()
+
+                                ouput.append(data_struct)
+
+                            #Json 
+                            # {value: ouput[i], description: input_ds[i]}, 
+
+                            # Just a column 
+                            sumdata = np.core.defchararray.add(ouput, dotcomma)
+                            sum_ = np.core.defchararray.add(sumdata, input_ds)
+
+                            # Csv
+                            # Store it in a csv file 
+                            # convert array into dataframe
+                            DF = pd.DataFrame(sum_)
+                        
+                            # save the dataframe as a csv file
+                            DF.to_csv("result.csv")
+                            print("Done csv")
+                            
+                            
+                            #print(sum_)
                 
+
+                        print("ReadStatus False")
+                        ReadStatus = False
+                        done = "tt"
+                        
+                                  
+                    except (ConnectionError, ua.UaError):
+                        sleep(1)
+                        print("Something with the connextion went wrong")
+                        #display 
+                        
+
+                
+            return done
+                    

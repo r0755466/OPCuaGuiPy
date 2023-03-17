@@ -6,3 +6,4 @@ tabulate
 pysondb
 split
 numpy
+pandas 

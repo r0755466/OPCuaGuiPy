@@ -34,3 +34,9 @@ https://stackoverflow.com/questions/9958506/element-wise-string-concatenation-in
 https://www.geeksforgeeks.org/how-to-read-csv-files-with-numpy/
 https://www.simplilearn.com/tutorials/python-tutorial/list-to-string-in-python#:~:text=To%20convert%20a%20list%20to%20a%20string%2C%20use%20Python%20List,and%20return%20it%20as%20output.
 https://note.nkmk.me/en/python-numpy-ndarray-ndim-shape-size/#:~:text=source%3A%20numpy_ndim_shape_size.py-,Size%20of%20the%20first%20dimension%20of%20the%20NumPy%20array%3A%20len,of%20characters%20in%20a%20string.&text=For%20numpy.ndarray%20%2C%20len(),size%20of%20the%20first%20dimension.
+
+
+#Filter data with types 
+
+https://www.guru99.com/type-isinstance-python.html
+https://www.guru99.com/type-isinstance-python.html

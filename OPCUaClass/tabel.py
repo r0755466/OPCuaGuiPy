@@ -90,10 +90,7 @@ layout1 = [
   [sg.Button('connect'), sg.Button('Cancel')],
 ]
 
-
-
 # Maybe can use it later pysondb convert --c file.csv --d file.json
-
 # TKinter function to display and edit value in cell
 def edit_cell(window, key, row, col, justify='left'):
 
@@ -205,21 +202,16 @@ def read_csv_file():
 headings = ['GroupName', 'Protocol', 'endpoint', 'user', 'pass', 'csv-file-with-addresses' ]
 
 # 4 * 6 = 24 
+#Best we call it from the config file 
 data = [
-    ['Jeff', '1X546J', 'Jeff', '1X546J','Jeff', '1X546J','Jeff', '1X546J'],
-    ['Jeff', '1X546J', 'Jeff', '1X546J','Jeff', '1X546J','Jeff', '1X546J'],
-    ['Jeff', '1X546J', 'Jeff', '1X546J','Jeff', '1X546J','Jeff', '1X546J'],
-    ['Jeff', '1X546J', 'Jeff', '1X546J','Jeff', '1X546J','Jeff', '1X546J']
+    ['Arburg', 'OPCUA', 'opc.tcp://10.210.40.215:4880/Arburg', 'host_computer',' ', 'dataSS.csv'],
 ]
 
-
-# Data we can get out of the function
+# Data we can get out of the functions
 # We can add functions like connectios successfull and expetions 
 # Saving all the data in one array ??
 # We load from an csv all the 
 #We wanna add 71 x ns(n), we iterate the number behindn we add it into headings 
-
-
 
 def load_config(): 
     # Only onces on the beginning 
@@ -283,7 +275,7 @@ def main():
 
               [sg.Text('Cell clicked:'), sg.T(key='-CLICKED_CELL-')], [sg.Button('connect'), sg.Button('Cancel')],]
     
-    logging_layout = [[sg.Multiline(size=(30, 5), key='-pop up-')]
+    logging_layout = [[sg.Multiline(size=(100, 100), key='-pop up-')]
     ]  # identify the multiline via key option
 
 
@@ -326,7 +318,15 @@ def main():
             # In functie van de row en col met de juiste id uploaden 
 
             # Manueel alle rows and colums 
-            print(cell)
+
+
+            print(cell_data, row, col ) 
+            #Every time we save an value we wanna know what is the value, what value we wanna save and where. 
+            # We coud loop the row and col and in function of it we save the value in the correct coordinates
+
+            
+
+
             # 4 * 9 matrix 
 
             # 36 slotten 
@@ -335,24 +335,21 @@ def main():
 
             # 4 * 6 
 
-            save_config(row, col, cell_data, 150308794076421552)
+            save_config(0, 0, cell_data, 150308794076421552)
             save_config(row, col, cell_data, 150308794076421552)
             save_config(row, col, cell_data, 556803059551467806)
             save_config(row, col, cell_data, 223225519456388549)
             save_config(row, col, cell_data, 118972688174942392)
-
             save_config(row, col, cell_data, 289290901641572105)
+
             save_config(row, col, cell_data, 309916605574841806)
             save_config(row, col, cell_data, 309916605574841806)
             save_config(row, col, cell_data, 307988845125037723)
             save_config(row, col, cell_data, 269819806826407424)
-            
             save_config(row, col, cell_data, 223225519456388549)
             save_config(row, col, cell_data, 223225519456388549)
+
             save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            
             save_config(row, col, cell_data, 223225519456388549)
             save_config(row, col, cell_data, 223225519456388549)
             save_config(row, col, cell_data, 223225519456388549)
@@ -364,7 +361,9 @@ def main():
             save_config(row, col, cell_data, 223225519456388549)
             save_config(row, col, cell_data, 223225519456388549)
             save_config(row, col, cell_data, 223225519456388549)
+            save_config(row, col, cell_data, 223225519456388549)
 
+            save_config(row, col, cell_data, 223225519456388549)
             save_config(row, col, cell_data, 223225519456388549)
             save_config(row, col, cell_data, 223225519456388549)
             save_config(row, col, cell_data, 223225519456388549)
