@@ -6,57 +6,187 @@
 # Machienes to test with EU 63 that work 
 #M236 , m461; m582 , m607 , m614 , m615 
 
-# https://docs.fabfile.org/en/latest/getting-started.html
-
 # To connect to the server to retirve the data 
-from contextlib     import closing
-from fabric.network import connect
 
-user = 'root' # your SSH user
-host = '162.109.54.99' #IP of your server
-port = '80' #SSH Port
-remote_file = '/m614/cycle.txt'
+# In folder all values Fanuc we can decide all the values we wanna store.
 
-with closing(connect(user, host, port)) as ssh, \
-     closing(ssh.open_sftp()) as sftp, \
-     closing(sftp.open(remote_file)) as file:
-    for line in file:
-        print(line)
+#MAXSESSIONS=12
 
-import sys
+from time import sleep
+import numpy as np 
+import pandas as pd
+from tabulate import tabulate
+
 
 class EuroMap63:
+        #What is not working for the moment accessing the folder on the server 
+        # We make an Session file. That calls the job file 
+        # Later we can scale it for for multiple differant session names
+        # We write in the correct folder 
+        # We can again make an tabel where we have the address to the file 
+        #162.109.54.99//
+        #string_in_string = "Shepherd {} is on duty.".format(shepherd)
 
-    #What is not working for the moment accessing the folder on the server 
+        def export_csv(data): 
+            col_names = ["values", "description"]
+            description = data[0]
+            values = data[1]
 
-    # We make an Session file. That calls the job file 
-    # Later we can scale it for for multiple differant session names
-    # We write in the correct folder 
-    # We can again make an tabel where we have the address to the file 
-    #162.109.54.99//
-    #string_in_string = "Shepherd {} is on duty.".format(shepherd)
+            description_ = description.split(',')
+            values_ = values.split(',')
 
-    machine= "/M614/"
+            for i in range(len(values_)):
+                print(description_[i],"Values:", values_[i])
+            
 
-    def sessionStart():
-        server = "162.109.54.99//"
-        #with open( '{}M614/SESS0000.req'.format(server), 'w') as f:
-        with open( '//162.109.54.99/M614/SESS0000.req', 'w') as f:
-            f.write('REQ_0000 EXECUTE "C:\EM63\M614\cycle.job";')
-    
-    # If it does not exist make one other wise don't, first we look for the file 
-    def makeJob(): 
-        with open('REPORT0001.job', 'w') as f:
-            f.write('REQ_0000 EXECUTE "C:\EM63\M614\cycle.job";')
+        # We save locally ur structures for ur files: 
+        # We need to specify wich machine
+        # If we get an response we have an connection ? 
+        #Data not equal to 0 ? Just the Data is readble? 
+        def sessionStart(machine):
+            #server = "162.109.54.99//"
+            #with open( '{}M614/SESS0000.req'.format(server), 'w') as f:
+            with open( 'C:\EM63\{}\SESS0000.req'.format(machine), 'w') as f:
+                f.write('REQ_0000 EXECUTE "C:\EM63\{}\REPORT0001.job";'.format(machine))
+        
+        # If it does not exist make one other wise don't, first we look for the file 
+        def makeJob(machine): 
+            with open('C:\EM63\{}\REPORT0001.job'.format(machine), 'w') as f:
+                f.write('JOB Report0001 RESPONSE "REPORT0001.LOG";\n')
+                f.write('REPORT Report0001 REWRITE "REPORT0001.DAT"\n')
+                f.write('START IMMEDIATE\n')
+                f.write('STOP NEVER\n')
+                f.write('CYCLIC TIME 00:00:10\n')
+                f.write('PARAMETERS\n')
+                f.write('DATE,\n')
+                f.write('ActStrCsh[1],\n')
+                f.write('ActTimFill[1],\n')
+                f.write('ActTimPlst[1],\n')
+                f.write('ActPrsMachSpecMax,\n')
+                f.write('ActTimCyc,\n')
+                f.write('@ActExtStartPos,\n')
+                f.write('ActTmpBrlZn[1,1],\n')
+                f.write('ActTmpBrlZn[1,2],\n')
+                f.write('ActTmpBrlZn[1,3],\n')
+                f.write('ActTmpBrlZn[1,4],\n')
+                f.write('ActTmpBrlZn[1,5],\n')
+                f.write('ActTmpBrlZn[1,6],\n')
+                f.write('ActTmpBrlZn[1,7],\n')
+                f.write('ActTmpBrlZn[1,8],\n')
+                f.write('ActStrXfr[1],\n')
+                f.write('@ActTmpHRZn[1],\n')
+                f.write('ActStsMach,\n')
+                f.write('ActCntCycRej,    \n')
+                f.write('ActCntCyc,           \n')
+                f.write('ActPrsXfrSpec[1],  \n')
+                f.write('ActStrPlst[1],           \n')
+                f.write('@ActExtTorque6,           \n')
+                f.write('@ActInjPeakTime,           \n')
+                f.write('@ActInjPeakPos,           \n')
+                f.write('@ActEjeDevTrq,           \n')
+                f.write('@ActClampOpenTime,           \n')
+                f.write('@ActEjectTime,           \n')
+                f.write('@ActCloseTime,           \n')
+                f.write('@ActPickupTime,           \n')
+                f.write('@ActResidenceTime,           \n')
+                f.write('@ActInjStartPrs,           \n')
+                f.write('@ActFillingPrs,           \n')
+                f.write('@ActPackEndPrs,           \n')
+                f.write('@ActPackEndPos,           \n')
+                f.write('@ActCmpDst,           \n')
+                f.write('@ActCmpPrs,           \n')
+                f.write('@ActFlowPeak,          \n')
+                f.write('@ActBackFlow,          \n')
+                f.write('@ActLockUpTime,          \n')
+                f.write('@ActEjeCmpPos,          \n')
+                f.write('@ActEjePeakTrq,          \n')
+                f.write('@ActEjeAvrDevTrq,          \n')
+                f.write('@ActConsumpPower,          \n')
+                f.write('@ActConsumpServo,          \n')
+                f.write('@ActConsumpSrvRe,          \n')
+                f.write('@ActConsumpHeater,          \n')
+                f.write('@ActConsumpOther,          \n')
+                f.write('@ActScrewMTLoad,          \n')
+                f.write('@ActclampMTLoad,          \n')
+                f.write('@ActExtruderMTLoad,          \n')
+                f.write('@ActScrewRev,          \n')
+                f.write('@Set_SB_MaxInjectionPressure,          \n')
+                f.write('@Set_SB_MaxInjectionTime,          \n')
+                f.write('@Set_SB_InjectionPressureAlarm,          \n')
+                f.write('@Set_SB_PackPressure1,          \n')
+                f.write('@Set_SB_PackTime1,          \n')
+                f.write('@Set_SB_PackPressure2,          \n')
+                f.write('@Set_SB_PackPressure3,          \n')
+                f.write('@Set_SB_PackTime2,          \n')
+                f.write('@Set_SB_PackTime3,          \n')
+                f.write('@Set_SB_PackStep,          \n')
+                f.write('@ActInjPeakVol,          \n')
+                f.write('@Set_SB_Barrel1Temperature,          \n')
+                f.write('@Set_SB_Barrel2Temperature,          \n')
+                f.write('@Set_SB_Barrel3Temperature,          \n')
+                f.write('@Set_SB_Barrel4Temperature,          \n')
+                f.write('@Set_SB_FeedThroatTemperature,          \n')
+                f.write('@Set_SB_UpperLimitOfBarrel1Temperature,          \n')
+                f.write('@Set_SB_UpperLimitOfBarrel2Temperature,          \n')
+                f.write('@Set_SB_UpperLimitOfBarrel3Temperature,          \n')
+                f.write('@Set_SB_UpperLimitOfBarrel4Temperature,          \n')
+                f.write('@Set_SB_UpperLimitOfFeedThroatTemperature,          \n')
+                f.write('@Set_SB_LowerLimitOfBarrel1Temperature,          \n')
+                f.write('@Set_SB_LowerLimitOfBarrel2Temperature,          \n')
+                f.write('@Set_SB_LowerLimitOfBarrel3Temperature,          \n')
+                f.write('@Set_SB_LowerLimitOfBarrel4Temperature,          \n')
+                f.write('@Set_SB_LowerLimitOfFeedThroatTemperature          \n')
+                f.write(';          \n')
+            
+        # The dat file has the data we wanna read
+        # Using the next commands we overwrite it. 
 
-    # The dat file has the data we wanna read
-    def ReadDat():
-         with open('REPORT0001.dat') as f:
-             lines = f.readlines()
-             print(lines)
-    
-    #We wanna split the file .dat and read the values. Maybe a Graph or something similar. 
-#EuroMap63.sessionStart()
+        def ReadDat(machine):
+            with open('C:\EM63\{}\REPORT0001.dat'.format(machine)) as f:
+                lines = f.readlines()
+                #print(lines)
+
+                # 50% description other 50% values 
+                data = []
+                data.append(lines)
+                #print("This is data", data)
+                # We get only the values 
+                data_datfile = np.array(data[0])
+                data_np1 = np.array(data)
+                #print(data_np)
+                #print(data_np.size
+        
+                #print("Description", data_datfile[0])
+                #print("Values", data_datfile[1])d
+
+                EuroMap63.makingantable(data_datfile)
+           
+                # We need to get inside the first array
+                #We wanna split the file .dat and read the values. Maybe a Graph or something similar. 
+                # [array([''], [''])]
+
+        def makingconnection(cycletime, machine):
+            while(True): 
+                # we call the session every 10 seconds 
+                print("Starting session")
+                EuroMap63.makeJob(machine)
+                EuroMap63.sessionStart(machine)
+                print("Reading data")
+                EuroMap63.ReadDat(machine)
+                sleep(cycletime)
+
+                
+# We just give the name of the machine we want, for example "/M614/"
+
+# Input interface 
+
+EuroMap63.makingconnection(10,"M614")
+
+
+
+
+
+
 
 
 

@@ -41,5 +41,21 @@ correct session we get an file wirh all the data.
 
 We gone need to filter 701 values write an Report file, soo we can get the data. 
 
+This was an early file DATE,TIME,ActStrCsh[1],ActTimFill[1],ActTimPlst[1],ActPrsMachSpecMax,ActPrsXfrSpec[1],ActTimCyc,@ActExtStartPos,ActTmpBrlZn[1,1],ActTmpBrlZn[1,2],ActTmpBrlZn[1,3],ActTmpBrlZn[1,4],ActTmpBrlZn[1,5],ActTmpBrlZn[1,6],ActTmpBrlZn[1,7],ActTmpBrlZn[1,8],ActStrXfr[1],ActStsMach,ActCntCycRej,ActCntCyc,ActStrPlst[1],@ActExtTorque6,@ActInjPeakTime,@ActInjPeakPos,@ActEjeDevTrq
+20220729,14:33:23,4.73,0.475,1.92,1028,1026,10.22,4.80,527.1,0.0,518.0,509.1,491.1,0.0,0.0,148.2,10.00,"0A000",162,49174,48.50,31.86,0.478,9.78,-3.2
+
+
+
+To convert the app to an exe needs to be all in one file, that is why the Allone.py is soo long. 
+
+We gone have 2 seperated apps one with EuroMap63 and one with OPCUA GUI. 
+
+All send data via SQL.
+
+
+
+
+
+
 
 

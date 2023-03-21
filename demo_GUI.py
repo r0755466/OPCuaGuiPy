@@ -72,6 +72,7 @@ def make_window(theme):
     
     theme_layout = [[sg.Text("See how elements look under different themes by choosing a different theme here!")],
                     [sg.Listbox(values = sg.theme_list(), 
+                
                       size =(20, 12), 
                       key ='-THEME LISTBOX-',
                       enable_events = True)],
@@ -79,6 +80,8 @@ def make_window(theme):
     
     layout = [ [sg.MenubarCustom(menu_def, key='-MENU-', font='Courier 15', tearoff=True)],
                 [sg.Text('Demo Of (Almost) All Elements', size=(38, 1), justification='center', font=("Helvetica", 16), relief=sg.RELIEF_RIDGE, k='-TEXT HEADING-', enable_events=True)]]
+
+                
     layout +=[[sg.TabGroup([[  sg.Tab('Input Elements', input_layout),
                                sg.Tab('Asthetic Elements', asthetic_layout),
                                sg.Tab('Graphing', graphing_layout),

@@ -9,6 +9,7 @@ import asyncio
 from time import sleep
 
 from asyncua import Client, ua, Node
+
 #For file reading purposes 
 from asyncua.client.ua_file import UaFile
 
@@ -16,13 +17,12 @@ from IPython import embed
 
 from tabulate import tabulate
 
-import numpy as np 
 #from subhandler import subHandler
 
 import math 
-
+import numpy as np 
 import pandas as pd
-import numpy as np
+
 _logger = logging.getLogger(__name__)
 
 
@@ -214,10 +214,10 @@ class Connection:
                     indexNfdata = np.array(indexNf)
                     descrdata = np.array(description)
                     # We need to fill an array with lenght namespacedata with ; 
+                    
                     for i in range(indexNfdata.size):
                         dotcomma.append(";")
                         #print(dotcomma)
-
                 
                     for q in range(indexNfdata.size):
                         quotionmarks.append('"')

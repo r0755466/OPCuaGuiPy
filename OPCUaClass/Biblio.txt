@@ -56,3 +56,7 @@ https://github.com/SintefManufacturing/IMM_API
 # For ftp 
 https://matthew-brett.github.io/teaching/string_formatting.html
 https://www.google.com/search?q=OSError%3A+%5BErrno+22%5D+Invalid+argument%3A&rlz=1C1GCEJ_enBE1044BE1044&oq=OSError%3A+%5BErrno+22%5D+Invalid+argument%3A&aqs=chrome..69i57j69i58.174j0j7&sourceid=chrome&ie=UTF-8
+
+# For connection with the server 
+#https://docs.fabfile.org/en/latest/getting-started.html
+#https://stackoverflow.com/questions/48916722/write-to-file-on-a-remote-server-in-python
