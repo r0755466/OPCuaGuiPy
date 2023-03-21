@@ -291,15 +291,17 @@ class Connection:
                             # Csv
                             # Store it in a csv file 
                             # convert array into dataframe
+
+                            #We need to add on the top (i , value, description )
+                            print(sum_)
                             DF = pd.DataFrame(sum_)
                         
                             # save the dataframe as a csv file
                             DF.to_csv("result.csv")
                             print("Done csv")
                             
-                            
                             #print(sum_)
-                
+            
 
                         print("ReadStatus False")
                         ReadStatus = False

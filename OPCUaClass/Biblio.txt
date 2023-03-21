@@ -40,3 +40,19 @@ https://note.nkmk.me/en/python-numpy-ndarray-ndim-shape-size/#:~:text=source%3A%
 
 https://www.guru99.com/type-isinstance-python.html
 https://www.guru99.com/type-isinstance-python.html
+
+# Drawing an graph 
+https://gist.github.com/KenoLeon/73449609eb92862fa56c2f3df4e80426
+
+
+#Sql saving data: 
+https://mariadb.com/resources/blog/how-to-connect-python-programs-to-mariadb/
+
+
+# For the engel 
+https://github.com/SintefManufacturing/IMM_API
+
+
+# For ftp 
+https://matthew-brett.github.io/teaching/string_formatting.html
+https://www.google.com/search?q=OSError%3A+%5BErrno+22%5D+Invalid+argument%3A&rlz=1C1GCEJ_enBE1044BE1044&oq=OSError%3A+%5BErrno+22%5D+Invalid+argument%3A&aqs=chrome..69i57j69i58.174j0j7&sourceid=chrome&ie=UTF-8

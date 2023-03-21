@@ -7,3 +7,5 @@ pysondb
 split
 numpy
 pandas 
+mariadb
+fabric

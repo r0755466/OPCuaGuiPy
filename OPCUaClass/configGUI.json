@@ -2,38 +2,38 @@
    "data": [
       {
          "row": 0,
-         "col": 1,
-         "value": "OPCUA",
+         "col": 0,
+         "value": "arburg",
          "id": 150308794076421552
       },
       {
-         "row": 1,
+         "row": 0,
          "col": 1,
-         "value": "bla",
+         "value": "OPCUA",
          "id": 129402203518110603
       },
       {
          "row": 0,
-         "col": 1,
-         "value": "OPCUA",
+         "col": 2,
+         "value": "opc.tcp://10.210.40.215:4880/Arburg",
          "id": 556803059551467806
       },
       {
          "row": 0,
-         "col": 1,
-         "value": "OPCUA",
+         "col": 3,
+         "value": "host_computer",
          "id": 223225519456388549
       },
       {
          "row": 0,
-         "col": 1,
-         "value": "OPCUA",
+         "col": 4,
+         "value": "host_computer",
          "id": 118972688174942392
       },
       {
          "row": 0,
-         "col": 1,
-         "value": "OPCUA",
+         "col": 5,
+         "value": "host_computer",
          "id": 289290901641572105
       },
       {

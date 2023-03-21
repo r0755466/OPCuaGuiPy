@@ -60,7 +60,7 @@ groupname2 = " "
 servername3 = " "
 groupname3 = " "
 
-sg.theme('BluePurple')   # Add a touch of color
+sg.theme('DarkBrown')   # Add a touch of color
 
 #We are adding some menus 
 menu_def = [['add certficates', ['certificate', 'key',]],
@@ -107,6 +107,7 @@ def edit_cell(window, key, row, col, justify='left'):
                 print("From widget" , text)
                 #For in the main function 
 
+
             # Destroy the entry widget
             widget.destroy()
             # Destroy all widgets
@@ -123,9 +124,9 @@ def edit_cell(window, key, row, col, justify='left'):
 
             table.item(row, values=values)
 
+
             # We also store it in the data file 
     
-
             edit = False
            
           
@@ -169,6 +170,9 @@ def edit_cell(window, key, row, col, justify='left'):
         # which corresponds to the "FocusOut" (clicking outside of the cell) event
         entry.bind("<FocusOut>", lambda e, r=row, c=col, t=text, k='Focus_Out':callback(e, r, c, t, k))
 
+    
+
+
         return text
 
 #Tabel headings 
@@ -203,9 +207,14 @@ headings = ['GroupName', 'Protocol', 'endpoint', 'user', 'pass', 'csv-file-with-
 
 # 4 * 6 = 24 
 #Best we call it from the config file 
+
 data = [
     ['Arburg', 'OPCUA', 'opc.tcp://10.210.40.215:4880/Arburg', 'host_computer',' ', 'dataSS.csv'],
+    ['', '', '', '',' ', ''], 
+    ['', '', '', '',' ', '']
 ]
+
+
 
 # Data we can get out of the functions
 # We can add functions like connectios successfull and expetions 
@@ -214,9 +223,16 @@ data = [
 #We wanna add 71 x ns(n), we iterate the number behindn we add it into headings 
 
 def load_config(): 
-    # Only onces on the beginning 
-    # We iterate true very value from the config file
-    print("cant be empty")
+    print("loading data")
+    data = [
+        [ my_parser(150308794076421552), my_parser(129402203518110603), my_parser(556803059551467806) , my_parser(223225519456388549)," ", "dataSS.csv"],
+        ['', '', '', '',' ', ''], 
+        ['', '', '', '',' ', '']
+    ]
+
+
+    return data 
+  
 
 #Every time 
 def save_config(row, col, value, idd):
@@ -233,18 +249,19 @@ def my_parser(id_json):
         vv = []
         test = a.getByQuery({"id":id_json})
         data1 = test[0]
-        for r in data1 ['row']: 
-            print(r)
-        for c in data1 ["col"]: 
-            print(c)
+        #for r in data1 ['row']: 
+            #print(r)
+       # for c in data1 ["col"]: 
+           # print(c)
         for v in data1 ["value"]:
             vv.append(v)
-        rcv = ''.join(vv)
+        #rcv = ''.join(vv)
         print(''.join(vv))
-        row = r
-        col = c 
+        #row = r
+        #col = c 
         value = ''.join(vv)
-        return r , c , value 
+        #return r , c , value 
+        return value 
 
 def main():
     global edit 
@@ -256,8 +273,8 @@ def main():
             [sg.Combo(values=('Mange first connection', 'Mange second connection', 'Mange third connection'), default_value='Mange first connection', readonly=False, k='-AmountConnnection-')]
     ]
 
-    
-    layout_ = [[sg.Table(values=data, headings=headings, max_col_width=25,
+    # We insert data in the tabel using data, than we update the values from the tabel
+    layout_ = [[sg.Table(values=load_config(), headings=headings, max_col_width=25,
                         font=("Arial", 15),
                         auto_size_columns=True,
                         # display_row_numbers=True,
@@ -275,12 +292,12 @@ def main():
 
               [sg.Text('Cell clicked:'), sg.T(key='-CLICKED_CELL-')], [sg.Button('connect'), sg.Button('Cancel')],]
     
-    logging_layout = [[sg.Multiline(size=(100, 100), key='-pop up-')]
+    logging_layout = [[sg.Multiline(size=(30, 30), key='-pop up-')]
     ]  # identify the multiline via key option
 
 
     layout +=[[sg.TabGroup([[      
-                        sg.Tab('Connection1', layout_),
+                        sg.Tab('Connection', layout_),
                         sg.Tab('Output', logging_layout)
                     ]], key='-pop up-', expand_x=True, expand_y=True),
                     
@@ -302,8 +319,7 @@ def main():
         elif isinstance(event, tuple):
             if isinstance(event[2][0], int) and event[2][0] > -1:
                 cell = row, col = event[2]
-                # This the row or col where we are clicking to change it 
-              
+                # This the row or col where we are clicking to change it
 
             # Displays that coordinates of the cell that was clicked on
             window['-CLICKED_CELL-'].update(cell)
@@ -319,59 +335,41 @@ def main():
 
             # Manueel alle rows and colums 
 
+                 # Saving the data 
 
-            print(cell_data, row, col ) 
+            print("From widget ...", text, row, col ) 
+
+            if row == 0 and col == 0:  
+                save_config(0, 0, text, 150308794076421552)
+
+            elif row == 0 and col == 1:  
+                save_config(0, 1, text, 129402203518110603)
+
+            elif row == 0 and col == 2:  
+                save_config(0, 2, text, 556803059551467806)
+
+            elif row == 0 and col == 3:  
+                save_config(0, 3, text, 223225519456388549)
+
+            elif row == 0 and col == 4:  
+                save_config(0, 4, text, 118972688174942392)
+
+            elif row == 0 and col == 5:  
+                save_config(0, 5, text, 289290901641572105)
+
+            print("From main", cell_data, row, col ) 
             #Every time we save an value we wanna know what is the value, what value we wanna save and where. 
             # We coud loop the row and col and in function of it we save the value in the correct coordinates
-
-            
-
 
             # 4 * 9 matrix 
 
             # 36 slotten 
             # Aanvullen met de id om data te kunnen opslaan per venster
             # Wil ik per venster ?? 
-
-            # 4 * 6 
-
-            save_config(0, 0, cell_data, 150308794076421552)
-            save_config(row, col, cell_data, 150308794076421552)
-            save_config(row, col, cell_data, 556803059551467806)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 118972688174942392)
-            save_config(row, col, cell_data, 289290901641572105)
-
-            save_config(row, col, cell_data, 309916605574841806)
-            save_config(row, col, cell_data, 309916605574841806)
-            save_config(row, col, cell_data, 307988845125037723)
-            save_config(row, col, cell_data, 269819806826407424)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
-            save_config(row, col, cell_data, 223225519456388549)
             
-           
-
+            # When we want to call this function ?? 
+        
+  
         elif values[0] == 'certificate':
             sg.popup('Menu item chosen', values[0])
             path_certificate = sg.popup_get_file('Please enter a file name')

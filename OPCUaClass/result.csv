@@ -12,24 +12,24 @@
 10,"none; Average injection pressure via stroke, actual value"
 11,"none; Average injection pressure via stroke, tolerance"
 12,"1290.0; Maximum injection pressure, reference value"
-13,"1285.814208984375; Maximum injection pressure , actual value"
+13,"0.0; Maximum injection pressure , actual value"
 14,"100.0; Maximum injection pressure, tolerance"
 15,"1290.0; Switch-over injection pressure, reference value"
-16,"1285.814208984375; Switch-over pressure , actual value"
+16,"0.0; Switch-over pressure , actual value"
 17,"100.0; Switch-over injection pressure, tolerance"
 18,none; Start of measurement
 19,7.171716690063477; End of measurement
 20,"6.5; Material cushion, reference value"
-21,"6.472799301147461; Material cushion , actual value"
+21,"0.0; Material cushion , actual value"
 22,"0.5; Material cushion, tolerance"
 23,7.96999979019165; value of the parameter
-24,"7.9720659255981445; Switch-over stroke , actual value"
+24,"0.0; Switch-over stroke , actual value"
 25,"0.05000000074505806; Switch-over stroke, tolerance"
 26,"none; Injection start, reference value"
 27,"none; Injection start, actual value"
 28,"none; Injection start, tolerance"
 29,"none; Dosing time, reference value"
-30,"2.7300000190734863; Dosing time , actual value"
+30,"2.691999912261963; Dosing time , actual value"
 31,"1.0; Dosing time, tolerance"
 32,"0.5199999809265137; Injection time, reference value"
 33,"0.515999972820282; Injection time , actual value"
@@ -38,13 +38,13 @@
 36,"0.0; Variable injection time, actual value"
 37,"0.10000000149011612; Variable injection time, tolerance"
 38,245.0; Cylinder heating zone 1
-39,"244.39999389648438; Cylinder heating zone 1, actual value"
-40,5.0; Tolerance of cylinder heating zone 1
+39,"244.89999389648438; Cylinder heating zone 1, actual value"
+40,10.0; Tolerance of cylinder heating zone 1
 41,250.0; Cylinder heating zone 2
-42,"250.3000030517578; Cylinder heating zone 2, actual value"
+42,"249.8000030517578; Cylinder heating zone 2, actual value"
 43,5.0; Tolerance of cylinder heating zone 2
 44,255.0; Cylinder heating zone 3
-45,"255.0; Cylinder heating zone 3, actual value"
+45,"255.10000610351562; Cylinder heating zone 3, actual value"
 46,5.0; Tolerance of cylinder heating zone 3
 47,260.0; Cylinder heating zone 4
 48,"260.0; Cylinder heating zone 4, actual value"
@@ -53,7 +53,7 @@
 51,"259.8999938964844; Cylinder heating zone 5, actual value"
 52,5.0; Tolerance of cylinder heating zone 5
 53,60.0; Temperature of feed yoke
-54,"57.900001525878906; Temperature of feed yoke, actual value"
+54,"58.79999923706055; Temperature of feed yoke, actual value"
 55,"5.0; Temperature of feed yoke, tolerance"
 56,"none; Cylinder temperature control unit 1, actual value"
 57,"none; Cylinder temperature control unit 2, actual value"
