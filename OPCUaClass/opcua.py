@@ -24,8 +24,6 @@ customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
 
-
-
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
@@ -33,9 +31,6 @@ class App(customtkinter.CTk):
         # configure window
         self.title("Connectivity application")
         self.geometry(f"{1100}x{650}")
-
-        _host_computer = "host_computer"
-        self.host_computer = _host_computer
 
 
 
@@ -96,7 +91,7 @@ class App(customtkinter.CTk):
 
         # create main entry and button
         self.combobox_1 = customtkinter.CTkComboBox(self.tabview.tab("Arburg"),
-                                                    values=[_host_computer])
+                                                    values=["host_computer"])
         self.combobox_1.grid(row=1, column=0, padx=20, pady=(10, 10))
 
         self.combobox_2 = customtkinter.CTkComboBox(self.tabview.tab("Arburg"),
@@ -107,17 +102,18 @@ class App(customtkinter.CTk):
                                                     values=["opc.tcp://10.210.40.215:4880/Arburg"])
         self.combobox_3.grid(row=3, column=0, padx=20, pady=(10, 10))
 
-        self.combobox_3 = customtkinter.CTkComboBox(self.tabview.tab("Arburg"),
+        self.combobox_4 = customtkinter.CTkComboBox(self.tabview.tab("Arburg"),
                                                     values=["opc.tcp://10.210.40.215:4880/Arburg"])
-        self.combobox_3.grid(row=3, column=0, padx=20, pady=(10, 10))
+        self.combobox_4.grid(row=3, column=0, padx=20, pady=(10, 10))
 
         self.sidebar_button_1 = customtkinter.CTkButton(self.tabview.tab("Arburg"), text="Add Machine", command=self.addmachine_event)
         self.sidebar_button_1.grid(row=4, column=0, padx=20, pady=(10, 10))
-
+        
         self.combobox_1.set("Set the username")
         self.combobox_2.set("Set the paswwords")
         self.combobox_3.set("Set the endpoint")
-        self.combobox_3.set("Folder with namespaces id")
+        # We wanna set it correctly, soo it works.
+        self.combobox_4.set("Folder with namespaces id")
 
         # Loading when it is getting the data 
         self.progressbar_1 = customtkinter.CTkProgressBar(self.slider_progressbar_frame)
@@ -148,23 +144,21 @@ class App(customtkinter.CTk):
     def addmachine_event(self):
         print("Adding an machine")
 
-        
+        #We best read the size we wanna store, soo we get the best result. 
         # Read table, read all 
-        def read_csv_file(): 
-           df = pd.read_excel('tabel.xlsx')
+    
 
-           index_list = [0]
-           
-           df.loc[df.index[index_list]]
-           print(df)
+            
+
+            # We need to read how many elements and than we can add the new one on the correct index 
 
         def createtable(self): 
             # Create multiple lists
 
-            machinetype = ['Arburg']
-            Protocol = ['OPCUA']
-            username = [self.host_computer]
-            endpoint = ['opc.tcp://10.210.40.215:4880/Arburg']
+            machinetype = ["Arburg"]
+            Protocol = ["OPC UA"]
+            username = [self.combobox_3.get()]
+            endpoint = [self.combobox_4.get()]
             password = [' ']
             columns=['Machinetype','Protocol','username','password', 'endpoint']
 
@@ -172,14 +166,21 @@ class App(customtkinter.CTk):
             df = pd.DataFrame(list(zip(machinetype,Protocol,username, password, endpoint)), columns=columns)
 
             print(df)
-
             # We wanna first read the table and write one more than the last index.
-            df.to_excel('tabel.xlsx', 1)
+
+            Amount_saved_configs = read_csv_file()
+            print("test", Amount_saved_configs)
+
+            df.to_excel('tabel.xlsx', index=Amount_saved_configs + 1)
             self.textbox.insert("0.0", "Arburg\n\n")
+
+            # We have  to make ur table and than be able to retrive the data: 
+            # We add than every time and index more than the last. 
             
-        ##read_csv_file()
-        createtable()
-        read_csv_file()
+        #read_csv_file()
+        createtable(self)
+        #read_csv_file()
+        #get_data()
 
         # We coud call an other function 
 
