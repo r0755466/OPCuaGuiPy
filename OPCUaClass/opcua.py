@@ -145,16 +145,39 @@ class App(customtkinter.CTk):
         print("Adding an machine")
 
         #We best read the size we wanna store, soo we get the best result. 
-        # Read table, read all 
-    
+        # Read table, read all  
+        def read_csv_file(): 
+            df = pd.read_excel('tabel.xlsx')
+            print(df)
+            return df
 
-            
+        def print_tabel(self):
+            df = pd.read_excel('tabel.xlsx')
+            print(df)
+    
+            self.textbox.delete("0.2", "end")
+
+            # Before printing we clean the output 
+            for i in range(100): 
+                    try:
+                        # We extract the row 
+                        index_list = [i]
+                        df.loc[df.index[index_list]]
+                        print(index_list) #we get an list of how many elements 
+                        #print(df.loc[index_list,:])
+                        # We print all the elements from the list 
+                        self.textbox.insert("0.0", df.loc[index_list,:])
+                    
+                    except: 
+                        print("Configurations saved", index_list )
+                        break
+
+        
 
             # We need to read how many elements and than we can add the new one on the correct index 
 
         def createtable(self): 
             # Create multiple lists
-
             machinetype = ["Arburg"]
             Protocol = ["OPC UA"]
             username = [self.combobox_3.get()]
@@ -163,21 +186,29 @@ class App(customtkinter.CTk):
             columns=['Machinetype','Protocol','username','password', 'endpoint']
 
             # Create DataFrame from multiple lists
-            df = pd.DataFrame(list(zip(machinetype,Protocol,username, password, endpoint)), columns=columns)
+            newdf = pd.DataFrame(list(zip(machinetype,Protocol,username, password, endpoint)), columns=columns)
 
-            print(df)
             # We wanna first read the table and write one more than the last index.
 
-            Amount_saved_configs = read_csv_file()
-            print("test", Amount_saved_configs)
+            Olddf = read_csv_file()
 
-            df.to_excel('tabel.xlsx', index=Amount_saved_configs + 1)
-            self.textbox.insert("0.0", "Arburg\n\n")
+            # We add the old data frame to the new one:
+        
+            df_row_merged = pd.concat([Olddf, newdf], ignore_index=True)
+
+            df_row_merged.to_excel('tabel.xlsx', index=None)
+           
+            
+
+            # Wanna remove an configuration click on remove
+     
+            
+
 
             # We have  to make ur table and than be able to retrive the data: 
             # We add than every time and index more than the last. 
             
-        #read_csv_file()
+        print_tabel(self)
         createtable(self)
         #read_csv_file()
         #get_data()
