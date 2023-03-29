@@ -1,0 +1,72 @@
+http://freeopcua.github.io/
+https://python-opcua.readthedocs.io/en/latest/_modules/opcua/client/client.html#Client.load_private_key
+https://github.com/FreeOpcUa/opcua-client-gui
+https://github.com/FreeOpcUa/python-opcua/issues/916
+https://github.com/FreeOpcUa/python-opcua/blob/master/examples/generate_certificate.sh
+https://slproweb.com/products/Win32OpenSSL.html
+
+// Verband met software keuze
+https://s2labs.org/download/publications/2020_ETFA_Open-Source_OPC-UA.pdf
+https://github.com/FreeOpcUa/python-opcua/issues/1122
+
+
+//json 
+https://www.freecodecamp.org/news/build-a-simple-json-api-in-python/
+
+
+// Gui Zelf 
+https://www.pysimplegui.org/en/latest/#button-element
+
+# Writing to an file 
+https://www.w3schools.com/python/python_file_write.asp
+
+// Writing 
+https://www.youtube.com/watch?v=5hTWdnFz2Ts
+
+// Tabel 
+https://github.com/amithr/PySimpleGUI-Editable-Table/blob/main/main.py
+
+// Convert csv file 
+
+https://www.digitalocean.com/community/tutorials/python-convert-numpy-array-to-list
+https://www.geeksforgeeks.org/find-the-length-of-each-string-element-in-the-numpy-array/
+https://stackoverflow.com/questions/9958506/element-wise-string-concatenation-in-numpy
+https://www.geeksforgeeks.org/how-to-read-csv-files-with-numpy/
+https://www.simplilearn.com/tutorials/python-tutorial/list-to-string-in-python#:~:text=To%20convert%20a%20list%20to%20a%20string%2C%20use%20Python%20List,and%20return%20it%20as%20output.
+https://note.nkmk.me/en/python-numpy-ndarray-ndim-shape-size/#:~:text=source%3A%20numpy_ndim_shape_size.py-,Size%20of%20the%20first%20dimension%20of%20the%20NumPy%20array%3A%20len,of%20characters%20in%20a%20string.&text=For%20numpy.ndarray%20%2C%20len(),size%20of%20the%20first%20dimension.
+
+
+#Filter data with types 
+
+https://www.guru99.com/type-isinstance-python.html
+https://www.guru99.com/type-isinstance-python.html
+
+# Drawing an graph 
+https://gist.github.com/KenoLeon/73449609eb92862fa56c2f3df4e80426
+
+
+#Sql saving data: 
+https://mariadb.com/resources/blog/how-to-connect-python-programs-to-mariadb/
+
+
+# For the engel 
+https://github.com/SintefManufacturing/IMM_API
+
+
+# For ftp 
+https://matthew-brett.github.io/teaching/string_formatting.html
+https://www.google.com/search?q=OSError%3A+%5BErrno+22%5D+Invalid+argument%3A&rlz=1C1GCEJ_enBE1044BE1044&oq=OSError%3A+%5BErrno+22%5D+Invalid+argument%3A&aqs=chrome..69i57j69i58.174j0j7&sourceid=chrome&ie=UTF-8
+
+# For connection with the server 
+#https://docs.fabfile.org/en/latest/getting-started.html
+#https://stackoverflow.com/questions/48916722/write-to-file-on-a-remote-server-in-python
+
+
+# New interface 
+https://github.com/TomSchimansky/CustomTkinter
+
+# tabel exel 
+https://sparkbyexamples.com/pandas/pandas-select-rows-based-on-list-index/
+https://statisticsglobe.com/index-pandas-dataframe-python
+https://stackoverflow.com/questions/12850345/how-do-i-combine-two-dataframes
+https://www.askpython.com/python/array/reverse-an-array-in-python

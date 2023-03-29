@@ -1,0 +1,72 @@
+,0
+0,True;Monitoring of dosing time
+1,True; Monitoring of injection time
+2,0; Measurement selection
+3,True; Monitoring of maximum injection pressure
+4,True; Monitoring of material cushion
+5,True; Monitoring of switch-over stroke
+6,none; Monitoring of injection start
+7,True; Monitoring of switch-over injection pressure
+8,True; Monitoring of maximum torque
+9,"none; Average injection pressure via stroke, reference value"
+10,"none; Average injection pressure via stroke, actual value"
+11,"none; Average injection pressure via stroke, tolerance"
+12,"1260.0; Maximum injection pressure, reference value"
+13,"0.0; Maximum injection pressure , actual value"
+14,"100.0; Maximum injection pressure, tolerance"
+15,"1230.0; Switch-over injection pressure, reference value"
+16,"0.0; Switch-over pressure , actual value"
+17,"100.0; Switch-over injection pressure, tolerance"
+18,none; Start of measurement
+19,7.171716690063477; End of measurement
+20,"6.449999809265137; Material cushion, reference value"
+21,"0.0; Material cushion , actual value"
+22,"0.5; Material cushion, tolerance"
+23,7.96999979019165; value of the parameter
+24,"0.0; Switch-over stroke , actual value"
+25,"0.05000000074505806; Switch-over stroke, tolerance"
+26,"none; Injection start, reference value"
+27,"none; Injection start, actual value"
+28,"none; Injection start, tolerance"
+29,"none; Dosing time, reference value"
+30,"2.7320001125335693; Dosing time , actual value"
+31,"1.0; Dosing time, tolerance"
+32,"0.5199999809265137; Injection time, reference value"
+33,"0.515999972820282; Injection time , actual value"
+34,"0.029999999329447746; Injection time, tolerance"
+35,"0.0; Variable injection time, reference value"
+36,"0.0; Variable injection time, actual value"
+37,"0.10000000149011612; Variable injection time, tolerance"
+38,245.0; Cylinder heating zone 1
+39,"25.399999618530273; Cylinder heating zone 1, actual value"
+40,10.0; Tolerance of cylinder heating zone 1
+41,250.0; Cylinder heating zone 2
+42,"25.200000762939453; Cylinder heating zone 2, actual value"
+43,5.0; Tolerance of cylinder heating zone 2
+44,255.0; Cylinder heating zone 3
+45,"25.100000381469727; Cylinder heating zone 3, actual value"
+46,5.0; Tolerance of cylinder heating zone 3
+47,260.0; Cylinder heating zone 4
+48,"25.0; Cylinder heating zone 4, actual value"
+49,5.0; Tolerance of cylinder heating zone 4
+50,260.0; Cylinder heating zone 5
+51,"25.0; Cylinder heating zone 5, actual value"
+52,5.0; Tolerance of cylinder heating zone 5
+53,60.0; Temperature of feed yoke
+54,"23.299999237060547; Temperature of feed yoke, actual value"
+55,"5.0; Temperature of feed yoke, tolerance"
+56,"none; Cylinder temperature control unit 1, actual value"
+57,"none; Cylinder temperature control unit 2, actual value"
+58,"none; Cylinder temperature control unit 3, actual value"
+59,"none; Cylinder temperature control unit 4, actual value"
+60,"none;Cylinder temperature control unit 5, actual value"
+61,"none;Cylinder temperature control unit 6, actual value"
+62,none; Operating status of cylinder heating
+63,"none;Screw diameter, installed"
+64,"none;Screw diameter, installed"
+65,False;Status of screw enable
+66,none;Cylinder
+67,"none;Cylinder coding, actual value"
+68,none;Shot weight
+69,"none;Time until next inhibition of screw, actual value"
+70,"none;Time to screw enable, actual value"
