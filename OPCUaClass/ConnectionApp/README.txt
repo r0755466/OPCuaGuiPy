@@ -53,6 +53,14 @@ We gone have 2 seperated apps one with EuroMap63 and one with OPCUA GUI.
 All send data via SQL.
 
 
+# FEATURES that need to be added 
+Reverse main table soo we can see the data in chronogy 
+add and remove element feature 
+monitoring data, individual buttons to see every machine we connected with, data, status an graph 
+
+
+
+
 
 
 

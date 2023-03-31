@@ -271,7 +271,6 @@ class Connection:
 
                             struct = client.get_node(input_ns[i])
                             data_struct= await struct.read_value()
-
                             ouput.append(data_struct)
 
             
@@ -307,7 +306,7 @@ class Connection:
                     # If something went wrong we stop the lus
                     ReadStatus = False
 
-            return done , DF
+            return done , DF, ouput, input_ds
 
 
         async def Get_all_data_anonymous(end, file_address):
@@ -423,7 +422,7 @@ class Connection:
                     # If something went wrong we stop the lus
                     ReadStatus = False
 
-            return done , DF
+            return done , DF, ouput, input_ds
                     
 
                     

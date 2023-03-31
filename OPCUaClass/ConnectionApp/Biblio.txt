@@ -70,3 +70,12 @@ https://sparkbyexamples.com/pandas/pandas-select-rows-based-on-list-index/
 https://statisticsglobe.com/index-pandas-dataframe-python
 https://stackoverflow.com/questions/12850345/how-do-i-combine-two-dataframes
 https://www.askpython.com/python/array/reverse-an-array-in-python
+
+# Data plot 
+https://stackabuse.com/save-plot-as-image-with-matplotlib/
+
+# Remove item Panda
+
+https://stackoverflow.com/questions/47498667/python-pandas-delete-specific-rows-columns-in-excel
+https://www.youtube.com/watch?v=HU0re8UJViM
+

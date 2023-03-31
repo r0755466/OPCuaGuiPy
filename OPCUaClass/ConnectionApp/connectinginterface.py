@@ -18,11 +18,17 @@ import pandas as pd
 import numpy as np 
 
 import openpyxl
-import os
 
-#Connection class, for multiple connections 
+#My classes 
 from connection import Connection 
 from euromap import EuroMap63
+from dataplot import Mygraph
+
+from monitoring_tabel import monitoring
+from monitoring_tabel import ScrollableLabelButtonFrame
+
+import matplotlib.pyplot as plt
+import os
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -43,7 +49,7 @@ class App(customtkinter.CTk):
         self.grid_rowconfigure((0, 1, 2), weight=1)
 
         # create sidebar frame with widgets
-        self.sidebar_frame = customtkinter.CTkFrame(self, width=150, corner_radius=0)
+        self.sidebar_frame = customtkinter.CTkFrame(self, width=100, corner_radius=0)
         self.sidebar_frame.grid(row=0, column=0, rowspan=2, sticky="nsew")
         self.sidebar_frame.grid_rowconfigure(4, weight=1)
 
@@ -66,7 +72,7 @@ class App(customtkinter.CTk):
 
         # create textbox
         # We can what is in the text box using functions like state="disabled"
-        self.textbox = customtkinter.CTkTextbox(self, width=450)
+        self.textbox = customtkinter.CTkTextbox(self, width=400)
         self.textbox.grid(row=0, column=1, padx=(20, 0), pady=(20, 0), sticky="nsew")
 
                 # We can what is in the text box using functions like state="disabled"
@@ -86,9 +92,10 @@ class App(customtkinter.CTk):
         self.sidebar_button_1 = customtkinter.CTkButton(self.slider_progressbar_frame, text="Stop the Server", command=self.stoptheserver)
         self.sidebar_button_1.grid(row=3, column=0, padx=20, pady=10)
 
-        self.sidebar_button_1 = customtkinter.CTkButton(self.slider_progressbar_frame, text="Delete Config", command=self.deleteconfig)
-        self.sidebar_button_1.grid(row=2, column=2, padx=20, pady=10)
-
+        # Start monitoring data
+        self.sidebar_button_1 = customtkinter.CTkButton(self.slider_progressbar_frame, text="Monitoring Data", command=self.monitoring)
+        self.sidebar_button_1.grid(row=4, column=0, padx=20, pady=10)
+      
         # create tabview
         self.tabview = customtkinter.CTkTabview(self.sidebar_frame, width=250 , height=450)
         # the grid inside the main grid (where we have the containement)
@@ -144,18 +151,19 @@ class App(customtkinter.CTk):
         self.sidebar_button_1 = customtkinter.CTkButton(self.tabview.tab("Fanuc"), text="Add Machine", command=self.addmachine_event)
         self.sidebar_button_1.grid(row=5, column=0, padx=20, pady=(10, 10))
         
+
+        # For the Arburg pannel 
         self.combobox_1.set("Set the username")
         self.combobox_2.set("Set the paswwords")
         self.combobox_3.set("Set the endpoint")
         # We wanna set it correctly, soo it works.
         self.combobox_4.set("Folder with namespaces id")
 
-        # Loading when it is getting the data 
+        # Server loading 
         self.progressbar_1 = customtkinter.CTkProgressBar(self.slider_progressbar_frame)
         self.progressbar_1.grid(row=1, column=0, padx=(20, 10), pady=(10, 10), sticky="ew")
 
-        # set default values
-
+        # Settings vieuw app 
         self.appearance_mode_optionemenu.set("Dark")
         self.scaling_optionemenu.set("100%")
 
@@ -172,7 +180,18 @@ class App(customtkinter.CTk):
 
         self.textbox.delete("0.2", "end")
 
-        # Before printing we clean the output 
+         # create scrollable frame
+        
+        self.scrollable_frame = customtkinter.CTkScrollableFrame(self, label_text="Delete")
+        self.scrollable_frame.grid(row=0, column=2, padx=(20, 0), pady=(20, 0), sticky="nsew")
+        self.scrollable_frame.grid_columnconfigure(0, weight=1)
+
+
+        self.scrollable_label_button_frame = ScrollableLabelButtonFrame(master=self.scrollable_frame, width=50, command=self.delete_config, corner_radius=0)
+        self.scrollable_label_button_frame.grid(row=0, column=0, padx=0, pady=0, sticky="nsew")
+
+
+        
         for i in range(100): 
                 try:
                     # We extract the row 
@@ -182,28 +201,19 @@ class App(customtkinter.CTk):
                     #print(df.loc[index_list,:])
                     # We print all the elements from the list 
                     self.textbox.insert('1.0', df.loc[index_list,:])
+                    self.scrollable_label_button_frame.add_item("Config", i)
+                    
+           
                 
                 except: 
                     print("Configurations saved", index_list )
                     break
 
 
-        # create scrollable frame
-        self.scrollable_frame = customtkinter.CTkScrollableFrame(self, label_text="Delete")
-        self.scrollable_frame.grid(row=0, column=2, padx=(20, 0), pady=(20, 0), sticky="nsew")
-        self.scrollable_frame.grid_columnconfigure(0, weight=1)
-        # Make an array with all the swutches 
-        self.scrollable_frame_switches = []
 
-        for m in range(i):
-            switch = customtkinter.CTkSwitch(master=self.scrollable_frame, text=f"Remove setting {m}")
-            switch.grid(row=m, column=0, padx=10, pady=(0, 20))
-            # We add all the switches 
-            self.scrollable_frame_switches.append(switch)
-            print("Out of range")
         
-            
-            
+           
+
     def change_appearance_mode_event(self, new_appearance_mode: str):
         customtkinter.set_appearance_mode(new_appearance_mode)
 
@@ -211,16 +221,75 @@ class App(customtkinter.CTk):
         new_scaling_float = int(new_scaling.replace("%", "")) / 100
         customtkinter.set_widget_scaling(new_scaling_float)
 
-    def deleteconfig(self): 
-        # Need to add feature to erase file 
-        
-        # We also empty the data 
-        self.textbox.delete("0.2", "end")
-
+ 
     def stoptheserver(self):
         self.server = False
         print("Stop server", self.server)
+
+    def monitoring(self): 
+        # We start the application where we show ur differant connections
+        # We can than click every connection and get a vieuws of the data. We iterate around it. 
+        # Some alarms if it goes of, we get direct feedback. 
+        monitor = monitoring()
+        monitor.mainloop()
+
+    def delete_config(self, item, index):
+        print(f"label button frame clicked: {index}")  
+        # We can decide witch item we wanna delete 
+        # We read the csv file and we delete the row with id itme, pop out 
+        # We also empty the data 
+        # We read the file, we get the current structure. 
+        # We make a dataframe of the current structure. 
+
+        def read_csv_file(): 
+            df = pd.read_excel('tabel.xlsx')
+            print(df)
+            return df
+
+        # We remove the row we want 
+        # We make an new datafram 
+        def removerow(item): 
+            df = read_csv_file()
+            
+            df = df.drop(item)
+            return df
+        
+        # We overwrite the old dataframe with the new data
+        def overwirtetable(item):
+            df = pd.read_excel('tabel.xlsx')
+
+            # We iterate every colum and we rempalce it with emptyness
+            columns=['Machinetype','Protocol','Username','Password', 'Endpoint', 'AddressNs', 'mdescription', 'IP' ]
+            
      
+            for column in df.columns:
+                 df[column] = df[column].replace(r'\W',"")
+
+            df.to_excel("tabel.xlsx")
+            # We wirte the tabel with the newframe with the removed frame
+            
+            newdf = removerow(item)
+            newdf .to_excel("tabel.xlsx")
+
+            # We write the new table 
+            self.textbox.delete("0.0", "end")
+                
+            for i in range(100): 
+                    try:
+                        # We extract the row 
+                        index_list = [i]
+                        newdf.loc[newdf.index[index_list]]
+                        print(index_list) #we get an list of how many elements 
+                        #print(df.loc[index_list,:])
+                        # We print all the elements from the list 
+                        self.textbox.insert('1.0', newdf.loc[index_list,:])
+                    
+                    except: 
+                        print("Configurations saved", index_list )
+                        break
+        
+     
+        overwirtetable(index)
 
 
     def addmachine_event(self):
@@ -252,23 +321,14 @@ class App(customtkinter.CTk):
                         # We want to reverse what we show:  
                         # We store in an array and we reverse the elements
 
+
                         self.textbox.insert("0.0", df.loc[index_list,:])
 
-
-        
-
-            # Before we remake the table we write 0 
-            self.scrollable_frame_switches = []
-
-            for m in range(i):
-                switch = customtkinter.CTkSwitch(master=self.scrollable_frame, text=f"Remove setting {m}")
-                switch.grid(row=m, column=0, padx=10, pady=(0, 20))
-                # We add all the switches 
-                self.scrollable_frame_switches.append(switch)
 
             # We need to read how many elements and than we can add the new one on the correct index 
 
         def createtableFanuc(self):
+            print("Adding Fanuc")
             # Create multiple lists
             mdescription = [self.combobox_1_1.get()]
             machinetype = ["Fanuc"]
@@ -282,6 +342,7 @@ class App(customtkinter.CTk):
             df_row_merged.to_excel('tabel.xlsx', index=None)
 
         def createtableArburg(self): 
+            print("Adding Arburg")
             # Create multiple lists
             machinetype = ["Arburg"]
             Protocol = ["OPC UA"]
@@ -314,12 +375,14 @@ class App(customtkinter.CTk):
             # We add than every time and index more than the last. 
         
         if (self.tabview.get() == "Arburg" ): 
+            print("if Arburg")
             createtableArburg(self)
             print_tabel(self)
             #read_csv_file()
             #get_data()
 
         elif (self.tabview.get() == "Fanuc" ):
+            print("if Fanuc")
             createtableFanuc(self)
             print_tabel(self)
             #read_csv_file()
@@ -327,13 +390,10 @@ class App(customtkinter.CTk):
 
 
         # We coud call an other function 
-
         # Before we load the tabel already esxiting
-
         # We select an csv file we wanna add
         # We read it
         # We add one position more
-
         # We load the new table
 
 
@@ -344,7 +404,7 @@ class App(customtkinter.CTk):
         # Show data
         # Catch for the connection        
         self.progressbar_1.start()
-    
+
 
         # Make an array with connections , Detecting the OPCUA 
         # We read the table, we iterate in function of the protocol we connect. 
@@ -375,17 +435,82 @@ class App(customtkinter.CTk):
                             if df.loc[ i ,"Protocol"] == "OPC UA":
                                 # Starting connection OPC UA 
                                 print("Starting connection")
-                                try: 
-                                    done, dataframe = connection = asyncio.get_event_loop().run_until_complete(Connection.Get_all_data(endpoint, username, user_pas, addressNs))
-                                    print("from main", dataframe)
-                                except: 
-                                    done, dataframe = connection = asyncio.get_event_loop().run_until_complete(Connection. Get_all_data_anonymous(endpoint, addressNs))
-                                    print("from main", dataframe)
-                                    self.textbox.insert("0.0", "The OPC Ua connection with endpoint\n\n" + df.loc[ i ,"Endpoint"] + " is anonymous\n\n"  ) # add on the end
+                
+                            try: 
+                                done, dataframe, output = connection = asyncio.get_event_loop().run_until_complete(Connection.Get_all_data(endpoint, username, user_pas, addressNs))
+                                print("from main", dataframe)
+                    
+                                # Later we need to take it from an class 
+                                x = input_ds
+                                # corresponding y axis values
+                                y = output
+                    
+                                # plotting the points 
+                                plt.plot(x, y)
+                                
+                                # naming the x axis
+                                plt.xlabel('x - axis')
+                                # naming the y axis
+                                plt.ylabel('y - axis')
+                                
+                                # giving a title to my graph
+                                plt.title('Arbrg OPC Ua data')
+                    
+
+                                plt.savefig('Graph.png')
+                                
+                                self.home_frame_large_image_label = customtkinter.CTkLabel(self.scrollable_frame, text="", image=self.Graph_img)
+                                self.home_frame_large_image_label.grid(row=0, column=0, padx=20, pady=10)
+
+
+                            except: 
+
+                                done, dataframe, output, input_ds = connection = asyncio.get_event_loop().run_until_complete(Connection. Get_all_data_anonymous(endpoint, addressNs))
+                                print("from main", dataframe)
+                                self.textbox.insert("0.0", "The OPC Ua connection with endpoint\n\n" + df.loc[ i ,"Endpoint"] + " is anonymous\n\n"  ) # add on the end
+                                # Mygraph.drawgraph(output, machineID, machineType
+                                #Mygraph.drawgraph(self, output, input_ds, i, "Arburg")
+                                
+                                t = []
+                                s = []
+                                #To get all the data from the 
+                                print("From main", dataframe)
+
+                                for i in range(71):
+                                    
+                                    if (i == 38 or i ==  41 or i == 44 or i == 47 or i == 50 ): 
+                                        t.append(input_ds[i])
+                                        s.append(output[i])
+
+                                    
+                                    x = t
+                                    # corresponding y axis values
+                                    y = s
+                    
+                                # plotting the points 
+                                plt.plot(x, y)
+                                
+                                # naming the x axis
+                                plt.xlabel('x - axis')
+                                # naming the y axis
+                                plt.ylabel('y - axis')
+                                
+                                # giving a title to my graph
+                                plt.title('Arbrg OPC Ua data')
+                                
+                                # function to show the plot
+                                plt.savefig('Graph.png')
+
+                                #self.Graph_img = customtkinter.CTkImage(Image.open(os.path.join(image_path, "Graph.png")), size=(500, 150))
+                                #self.home_frame_large_image_label = customtkinter.CTkLabel(self.slider_progressbar_frame, text="", image=self.Graph_img)
+                                #self.home_frame_large_image_label.grid(row=0, column=0, padx=20, pady=10)
+
 
                                 for m in range(15):
                                     # Show the first 30 data tpyes
                                     self.textbox.insert("0.0", dataframe.loc[m,:])
+
+                                plt.show()
                         except: 
                             self.textbox.insert("0.0", " \n\n" * 2) # add on the end 
                             self.textbox.insert("0.0", "Something is wrong with the OPCUA connection\n\n" + df.loc[ i ,"Endpoint"] + "\n\n" ) # add on the end 
@@ -408,7 +533,6 @@ class App(customtkinter.CTk):
                                     self.textbox.insert("0.0", "Something went wrong with EU 63 - Machine\n\n" + df.loc[ i ,"mdescription"] + "\n\n" ) # add on the end 
                                     
 
-
                                 for m in range(15):
                                     # Show the first 30 data tpyes
                                     self.textbox.insert("0.0", dataframe.loc[m,:])
@@ -426,7 +550,6 @@ class App(customtkinter.CTk):
                             break
 
 
-
             self.progressbar_1.stop()
 
         # For loop connection and we change the parameters in an loop.
@@ -435,7 +558,6 @@ class App(customtkinter.CTk):
 if __name__ == "__main__":
     app = App()
     app.mainloop()
-
 
 # Woud be nice we can manage every connection we load an select if we wanna get data or not, like stop process or continue. 
 # Like switches, also secuirty to log in the application. 
