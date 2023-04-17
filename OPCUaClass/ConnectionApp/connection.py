@@ -306,7 +306,7 @@ class Connection:
                     # If something went wrong we stop the lus
                     ReadStatus = False
 
-            return done , DF, ouput, input_ds
+            return done , DF, ouput,
 
 
         async def Get_all_data_anonymous(end, file_address):

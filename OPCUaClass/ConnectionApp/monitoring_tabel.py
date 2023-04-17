@@ -96,6 +96,7 @@ class ScrollableLabelButtonFrame(customtkinter.CTkScrollableFrame):
         self.label_list = []
         self.button_list = []
 
+    # We use the iteration number as key and the item=config
     def add_item(self, item, i, image=None):
         label = customtkinter.CTkLabel(self, text=item, image=image, compound="left", padx=5, anchor="w")
         
@@ -110,15 +111,15 @@ class ScrollableLabelButtonFrame(customtkinter.CTkScrollableFrame):
         self.label_list.append(label)
         self.button_list.append(button)
 
-    def remove_item(self, item):
+    def remove_item(self, item, i):
         for label, button in zip(self.label_list, self.button_list):
+            pint("test........")
             if item == label.cget("text"):
                 label.destroy()
                 button.destroy()
                 self.label_list.remove(label)
                 self.button_list.remove(button)
                 return
-
 
 class monitoring(customtkinter.CTk):
     def __init__(self):
@@ -141,7 +142,6 @@ class monitoring(customtkinter.CTk):
         self.scrollable_radiobutton_frame = ScrollableRadiobuttonFrame(master=self, width=500, command=self.radiobutton_frame_event,
                                                                        item_list=[f"item {i}" for i in range(100)],
                                                                        label_text="ScrollableRadiobuttonFrame")
-
 
 
         self.scrollable_radiobutton_frame.grid(row=0, column=1, padx=15, pady=15, sticky="ns")

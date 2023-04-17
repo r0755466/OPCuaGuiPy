@@ -33,10 +33,19 @@ import os
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
+
+# Paramters that can be added for later ?? 
+#OPCUA 
+#Duty Cycle 10
+#reconnect interval 5s 
+#watchdog interval 5s 
+
+#Eu63 
+
+
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
-
 
         # configure window
         self.title("Connectivity application")
@@ -189,8 +198,6 @@ class App(customtkinter.CTk):
 
         self.scrollable_label_button_frame = ScrollableLabelButtonFrame(master=self.scrollable_frame, width=50, command=self.delete_config, corner_radius=0)
         self.scrollable_label_button_frame.grid(row=0, column=0, padx=0, pady=0, sticky="nsew")
-
-
         
         for i in range(100): 
                 try:
@@ -201,18 +208,14 @@ class App(customtkinter.CTk):
                     #print(df.loc[index_list,:])
                     # We print all the elements from the list 
                     self.textbox.insert('1.0', df.loc[index_list,:])
+                    
                     self.scrollable_label_button_frame.add_item("Config", i)
                     
-           
-                
+                        
                 except: 
                     print("Configurations saved", index_list )
                     break
 
-
-
-        
-           
 
     def change_appearance_mode_event(self, new_appearance_mode: str):
         customtkinter.set_appearance_mode(new_appearance_mode)
@@ -221,10 +224,6 @@ class App(customtkinter.CTk):
         new_scaling_float = int(new_scaling.replace("%", "")) / 100
         customtkinter.set_widget_scaling(new_scaling_float)
 
- 
-    def stoptheserver(self):
-        self.server = False
-        print("Stop server", self.server)
 
     def monitoring(self): 
         # We start the application where we show ur differant connections
@@ -232,6 +231,12 @@ class App(customtkinter.CTk):
         # Some alarms if it goes of, we get direct feedback. 
         monitor = monitoring()
         monitor.mainloop()
+
+
+    def stoptheserver(self):
+        self.server = False
+        print("Stop server", self.server)
+        return self.server
 
     def delete_config(self, item, index):
         print(f"label button frame clicked: {index}")  
@@ -245,6 +250,8 @@ class App(customtkinter.CTk):
             df = pd.read_excel('tabel.xlsx')
             print(df)
             return df
+
+            self.scrollable_label_button_frame.remove_item("Config",0) 
 
         # We remove the row we want 
         # We make an new datafram 
@@ -261,7 +268,6 @@ class App(customtkinter.CTk):
             # We iterate every colum and we rempalce it with emptyness
             columns=['Machinetype','Protocol','Username','Password', 'Endpoint', 'AddressNs', 'mdescription', 'IP' ]
             
-     
             for column in df.columns:
                  df[column] = df[column].replace(r'\W',"")
 
@@ -269,11 +275,15 @@ class App(customtkinter.CTk):
             # We wirte the tabel with the newframe with the removed frame
             
             newdf = removerow(item)
-            newdf .to_excel("tabel.xlsx")
 
-            # We write the new table 
-            self.textbox.delete("0.0", "end")
-                
+        
+
+            # We wanna drop the column unamed using an desctructor 
+            newdf = newdf.loc[:, ~newdf.columns.str.contains('^Unnamed')]
+            print("New dataframe", newdf)
+
+            newdf.to_excel("tabel.xlsx")
+
             for i in range(100): 
                     try:
                         # We extract the row 
@@ -287,8 +297,11 @@ class App(customtkinter.CTk):
                     except: 
                         print("Configurations saved", index_list )
                         break
+            
+            # We delete the button with the correspondig id 
+
+            self.textbox.delete(f"0.{str(i)}", "end")
         
-     
         overwirtetable(index)
 
 
@@ -324,6 +337,8 @@ class App(customtkinter.CTk):
 
                         self.textbox.insert("0.0", df.loc[index_list,:])
 
+                        self.scrollable_label_button_frame.add_item("Config", i)
+
 
             # We need to read how many elements and than we can add the new one on the correct index 
 
@@ -340,6 +355,7 @@ class App(customtkinter.CTk):
             Olddf = read_csv_file()
             df_row_merged = pd.concat([Olddf, newdf], ignore_index=True)
             df_row_merged.to_excel('tabel.xlsx', index=None)
+            
 
         def createtableArburg(self): 
             print("Adding Arburg")
@@ -418,10 +434,15 @@ class App(customtkinter.CTk):
 
         # columns=['Machinetype','Protocol','Username','Password', 'Endpoint', 'AddressNs']
 
+        print("status self.server:", self.server)
+
         while(self.server):
             # Before printing we clean the output
             # Max  200 machines 
+            
+            # Stop the server 
             for i in range(200): 
+                     
                         try: 
                             # We extract the row 
                             # if OPCUA ? THAN WE make the connection 
@@ -435,7 +456,7 @@ class App(customtkinter.CTk):
                             if df.loc[ i ,"Protocol"] == "OPC UA":
                                 # Starting connection OPC UA 
                                 print("Starting connection")
-                
+
                             try: 
                                 done, dataframe, output = connection = asyncio.get_event_loop().run_until_complete(Connection.Get_all_data(endpoint, username, user_pas, addressNs))
                                 print("from main", dataframe)
@@ -455,14 +476,15 @@ class App(customtkinter.CTk):
                                 
                                 # giving a title to my graph
                                 plt.title('Arbrg OPC Ua data')
-                    
 
                                 plt.savefig('Graph.png')
                                 
                                 self.home_frame_large_image_label = customtkinter.CTkLabel(self.scrollable_frame, text="", image=self.Graph_img)
                                 self.home_frame_large_image_label.grid(row=0, column=0, padx=20, pady=10)
 
+                                self.progressbar_1.stop()
 
+                    
                             except: 
 
                                 done, dataframe, output, input_ds = connection = asyncio.get_event_loop().run_until_complete(Connection. Get_all_data_anonymous(endpoint, addressNs))
@@ -481,8 +503,7 @@ class App(customtkinter.CTk):
                                     if (i == 38 or i ==  41 or i == 44 or i == 47 or i == 50 ): 
                                         t.append(input_ds[i])
                                         s.append(output[i])
-
-                                    
+                                   
                                     x = t
                                     # corresponding y axis values
                                     y = s
@@ -496,7 +517,7 @@ class App(customtkinter.CTk):
                                 plt.ylabel('y - axis')
                                 
                                 # giving a title to my graph
-                                plt.title('Arbrg OPC Ua data')
+                                plt.title('Arburg OPC Ua')
                                 
                                 # function to show the plot
                                 plt.savefig('Graph.png')
@@ -510,14 +531,18 @@ class App(customtkinter.CTk):
                                     # Show the first 30 data tpyes
                                     self.textbox.insert("0.0", dataframe.loc[m,:])
 
+                                self.progressbar_1.stop()
                                 plt.show()
+
+                              
                         except: 
-                            self.textbox.insert("0.0", " \n\n" * 2) # add on the end 
-                            self.textbox.insert("0.0", "Something is wrong with the OPCUA connection\n\n" + df.loc[ i ,"Endpoint"] + "\n\n" ) # add on the end 
-                            self.textbox.insert("0.0", "Check if you are in the right netwok(igonre if other connections work)\n\n" ) # add on the end 
+                            #There as problem with this expetation 
+                            
+                            #self.textbox.insert("0.0", " \n\n" * 2) # add on the end 
+                            #self.textbox.insert("0.0", "Something is wrong with the OPCUA connection\n\n" + df.loc[ i ,"Endpoint"] + "\n\n" ) # add on the end 
+                            #self.textbox.insert("0.0", "Check if you are in the right netwok(igonre if other connections work)\n\n" ) # add on the end 
                             print("Shutting down server")
-                            self.server = False
-                            break
+                 
 
                         try: 
                             if df.loc[ i ,"Protocol"] == "EU 63":
@@ -532,7 +557,6 @@ class App(customtkinter.CTk):
                                 except:
                                     self.textbox.insert("0.0", "Something went wrong with EU 63 - Machine\n\n" + df.loc[ i ,"mdescription"] + "\n\n" ) # add on the end 
                                     
-
                                 for m in range(15):
                                     # Show the first 30 data tpyes
                                     self.textbox.insert("0.0", dataframe.loc[m,:])
@@ -541,16 +565,17 @@ class App(customtkinter.CTk):
                             elif (df.loc[ i ,"Protocol"] != "EU 63" and  df.loc[ i ,"Protocol"] != "OPC UA"): 
                                 print("No data in the tabel")
 
+        
                         except:
                             print("Something is wrong with the EU63 ftp files")
                             print("Shutting down server")
                             self.textbox.insert("0.0", " \n\n" * 2) # add on the end 
                             self.textbox.insert("0.0", " Something is wrong with the EU63 ftp files\n\n" ) # add on the end 
-                            self.server = False
-                            break
+
+                            
 
 
-            self.progressbar_1.stop()
+            
 
         # For loop connection and we change the parameters in an loop.
         
