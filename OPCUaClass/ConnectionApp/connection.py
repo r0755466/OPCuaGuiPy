@@ -302,7 +302,7 @@ class Connection:
                         done = "Succesfully connected"
 
                 except :
-                    print("Something wrong, looks like the username, password or endpoint is wrong")  
+                    print("Trying Getting data with log in from:"+endpoint)  
                     # If something went wrong we stop the lus
                     ReadStatus = False
 
@@ -418,8 +418,12 @@ class Connection:
                         done = "Succesfully connected"
 
                 except :
-                    print("Something wrong, looks like the username, password or endpoint is wrong")  
-                    # If something went wrong we stop the lus
+                    print("Trying Getting data anonymous from: " +endpoint)  
+                    # After this we know that the connections is not possbile, soo it must be the network
+
+                    # We return the network is wrong
+                    done = "wrong network"
+                    # We stop the loop 
                     ReadStatus = False
 
             return done , DF, ouput, input_ds
