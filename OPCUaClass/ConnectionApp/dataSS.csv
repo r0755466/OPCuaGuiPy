@@ -1,71 +1,71 @@
-f4014;ns=2;i=202702;Monitoring of dosing time;;;;;;
-f4017;ns=2;i=202552; Monitoring of injection time;;;;;;
-f4021;ns=2;i=202742; Measurement selection;;;;;;
-f4054;ns=2;i=202452; Monitoring of maximum injection pressure;;;;;;
-f4061 ;ns=2;i=202652; Monitoring of material cushion;;;;;;
-f4064;ns=2;i=202402; Monitoring of switch-over stroke;;;;;;
-f4068;ns=2;i=202602; Monitoring of injection start;;;;;;
-f4071 ;ns=2;i=202502; Monitoring of switch-over injection pressure;;;;;;
-f4111;ns=2;i=202792; Monitoring of maximum torque;;;;;;
-p4021;ns=2;i=317412; Average injection pressure via stroke, reference value;;;;;;
-p4022;ns=2;i=317422; Average injection pressure via stroke, actual value;;;;;;
-p4023;ns=2;i=317432; Average injection pressure via stroke, tolerance;;;;;;
-p4054;ns=2;i=202462; Maximum injection pressure, reference value;;;;;;
-p4055;ns=2;i=202472; Maximum injection pressure , actual value;;;;;;
-p4056;ns=2;i=202482; Maximum injection pressure, tolerance;;;;;;
-p4071;ns=2;i=202512; Switch-over injection pressure, reference value;;;;;;
-p4072;ns=2;i=202522; Switch-over pressure , actual value;;;;;;
-p4073;ns=2;i=202532; Switch-over injection pressure, tolerance;;;;;;
-s4021;ns=2;i=202842; Start of measurement;;;;;;
-s4022;ns=2;i=202782; End of measurement;;;;;;
-s4061;ns=2;i=202662; Material cushion, reference value;;;;;;
-s4062;ns=2;i=202672; Material cushion , actual value;;;;;;
-s4063;ns=2;i=202682; Material cushion, tolerance;;;;;;
-s4064;ns=2;i=202412; value of the parameter;;;;;;
-s4065;ns=2;i=202422; Switch-over stroke , actual value;;;;;;
-s4066;ns=2;i=202432; Switch-over stroke, tolerance;;;;;;
-s4068;ns=2;i=202612; Injection start, reference value;;;;;;
-s4069;ns=2;i=202622; Injection start, actual value;;;;;;
-s4070;ns=2;i=202632; Injection start, tolerance;;;;;;
-t4014;ns=2;i=202712; Dosing time, reference value;;;;;;
-t4015;ns=2;i=202732; Dosing time , actual value;;;;;;
-t4016;ns=2;i=202722; Dosing time, tolerance;;;;;;
-t4017;ns=2;i=202562; Injection time, reference value;;;;;;
-t4018;ns=2;i=202582; Injection time , actual value;;;;;;
-t4019;ns=2;i=202572; Injection time, tolerance;;;;;;
-t4021;ns=2;i=202752; Variable injection time, reference value;;;;;;
-r4022;ns=2;i=202762; Variable injection time, actual value;;;;;;
-t4033;ns=2;i=202772; Variable injection time, tolerance;;;;;;
-T801;ns=2;i=207262; Cylinder heating zone 1;;;;;;
-T801I;ns=2;i=207272; Cylinder heating zone 1, actual value;;;;;;
-T801T;ns=2;i=207302; Tolerance of cylinder heating zone 1;;;;;;
-T802;ns=2;i=207412; Cylinder heating zone 2;;;;;;
-T802I;ns=2;i=207422; Cylinder heating zone 2, actual value;;;;;;
-T802T;ns=2;i=207452; Tolerance of cylinder heating zone 2;;;;;;
-T803;ns=2;i=207562; Cylinder heating zone 3;;;;;;
-T803I;ns=2;i=207572; Cylinder heating zone 3, actual value;;;;;;
-T803T;ns=2;i=207602; Tolerance of cylinder heating zone 3;;;;;;
-T804;ns=2;i=207712; Cylinder heating zone 4;;;;;;
-T804I;ns=2;i=207722; Cylinder heating zone 4, actual value;;;;;;
-T804T;ns=2;i=207752; Tolerance of cylinder heating zone 4;;;;;;
-T805;ns=2;i=207862; Cylinder heating zone 5;;;;;;
-T805I;ns=2;i=207872; Cylinder heating zone 5, actual value;;;;;;
-T805T;ns=2;i=207902; Tolerance of cylinder heating zone 5;;;;;;
-T821;ns=2;i=209032; Temperature of feed yoke;;;;;;
-T821I;ns=2;i=209042; Temperature of feed yoke, actual value;;;;;;
-T821T;ns=2;i=209062; Temperature of feed yoke, tolerance;;;;;;
-T886I;ns=2;i=193442; Cylinder temperature control unit 1, actual value;;;;;;
-T887I;ns=2;i=193582; Cylinder temperature control unit 2, actual value;;;;;;
-T894I;ns=2;i=193722; Cylinder temperature control unit 3, actual value;;;;;;
-T899I;ns=2;i=193862; Cylinder temperature control unit 4, actual value;;;;;;
-T900I;ns=2;i=194002;Cylinder temperature control unit 5, actual value;;;;;;
-T925I;ns=2;i=194142;Cylinder temperature control unit 6, actual value;;;;;;
-f80002;ns=2;i=207172; Operating status of cylinder heating;;;;;;
-d9105;ns=2;i=196242;Screw diameter, installed;;;;;;
-d9105I;ns=2;i=196252;Screw diameter, installed;;;;;;
-f90520I;ns=2;i=517482;Status of screw enable;;;;;;
-f9106;ns=2;i=196302;Cylinder;;;;;;
-f9109;ns=2;i=196332;Cylinder coding, actual value;;;;;;
-m9162;ns=2;i=196352;Shot weight;;;;;;
-t90520I;ns=2;i=517472;Time until next inhibition of screw, actual value;;;;;;
-t9052I;ns=2;i=517462;Time to screw enable, actual value;;;;;;
+f4014;ns=2;i=202702;Monitoring of dosing time
+f4017;ns=2;i=202552; Monitoring of injection time
+f4021;ns=2;i=202742; Measurement selection
+f4054;ns=2;i=202452; Monitoring of maximum injection pressure
+f4061 ;ns=2;i=202652; Monitoring of material cushion
+f4064;ns=2;i=202402; Monitoring of switch-over stroke
+f4068;ns=2;i=202602; Monitoring of injection start
+f4071 ;ns=2;i=202502; Monitoring of switch-over injection pressure
+f4111;ns=2;i=202792; Monitoring of maximum torque
+p4021;ns=2;i=317412; Average injection pressure via stroke, reference value
+p4022;ns=2;i=317422; Average injection pressure via stroke, actual value
+p4023;ns=2;i=317432; Average injection pressure via stroke, tolerance
+p4054;ns=2;i=202462; Maximum injection pressure, reference value
+p4055;ns=2;i=202472; Maximum injection pressure , actual value
+p4056;ns=2;i=202482; Maximum injection pressure, tolerance
+p4071;ns=2;i=202512; Switch-over injection pressure, reference value
+p4072;ns=2;i=202522; Switch-over pressure , actual value
+p4073;ns=2;i=202532; Switch-over injection pressure, tolerance
+s4021;ns=2;i=202842; Start of measurement
+s4022;ns=2;i=202782; End of measurement
+s4061;ns=2;i=202662; Material cushion, reference value
+s4062;ns=2;i=202672; Material cushion , actual value
+s4063;ns=2;i=202682; Material cushion, tolerance
+s4064;ns=2;i=202412; value of the parameter
+s4065;ns=2;i=202422; Switch-over stroke , actual value
+s4066;ns=2;i=202432; Switch-over stroke, tolerance
+s4068;ns=2;i=202612; Injection start, reference value
+s4069;ns=2;i=202622; Injection start, actual value
+s4070;ns=2;i=202632; Injection start, tolerance
+t4014;ns=2;i=202712; Dosing time, reference value
+t4015;ns=2;i=202732; Dosing time , actual value
+t4016;ns=2;i=202722; Dosing time, tolerance
+t4017;ns=2;i=202562; Injection time, reference value
+t4018;ns=2;i=202582; Injection time , actual value
+t4019;ns=2;i=202572; Injection time, tolerance
+t4021;ns=2;i=202752; Variable injection time, reference value
+r4022;ns=2;i=202762; Variable injection time, actual value
+t4033;ns=2;i=202772; Variable injection time, tolerance
+T801;ns=2;i=207262; Cylinder heating zone 1
+T801I;ns=2;i=207272; Cylinder heating zone 1, actual value
+T801T;ns=2;i=207302; Tolerance of cylinder heating zone 1
+T802;ns=2;i=207412; Cylinder heating zone 2
+T802I;ns=2;i=207422; Cylinder heating zone 2, actual value
+T802T;ns=2;i=207452; Tolerance of cylinder heating zone 2
+T803;ns=2;i=207562; Cylinder heating zone 3
+T803I;ns=2;i=207572; Cylinder heating zone 3, actual value
+T803T;ns=2;i=207602; Tolerance of cylinder heating zone 3
+T804;ns=2;i=207712; Cylinder heating zone 4
+T804I;ns=2;i=207722; Cylinder heating zone 4, actual value
+T804T;ns=2;i=207752; Tolerance of cylinder heating zone 4
+T805;ns=2;i=207862; Cylinder heating zone 5
+T805I;ns=2;i=207872; Cylinder heating zone 5, actual value
+T805T;ns=2;i=207902; Tolerance of cylinder heating zone 5
+T821;ns=2;i=209032; Temperature of feed yoke
+T821I;ns=2;i=209042; Temperature of feed yoke, actual value
+T821T;ns=2;i=209062; Temperature of feed yoke, tolerance
+T886I;ns=2;i=193442; Cylinder temperature control unit 1, actual value
+T887I;ns=2;i=193582; Cylinder temperature control unit 2, actual value
+T894I;ns=2;i=193722; Cylinder temperature control unit 3, actual value
+T899I;ns=2;i=193862; Cylinder temperature control unit 4, actual value
+T900I;ns=2;i=194002;Cylinder temperature control unit 5, actual value
+T925I;ns=2;i=194142;Cylinder temperature control unit 6, actual value
+f80002;ns=2;i=207172; Operating status of cylinder heating
+d9105;ns=2;i=196242;Screw diameter, installed
+d9105I;ns=2;i=196252;Screw diameter, installed
+f90520I;ns=2;i=517482;Status of screw enable
+f9106;ns=2;i=196302;Cylinder
+f9109;ns=2;i=196332;Cylinder coding, actual value
+m9162;ns=2;i=196352;Shot weight
+t90520I;ns=2;i=517472;Time until next inhibition of screw, actual value
+t9052I;ns=2;i=517462;Time to screw enable, actual value

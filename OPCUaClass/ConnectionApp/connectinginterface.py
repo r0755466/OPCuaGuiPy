@@ -10,7 +10,9 @@ from asyncua import Client, ua, Node
 from asyncua.client.ua_file import UaFile
 from IPython import embed
 from tabulate import tabulate
-from connection import Connection 
+
+from opc_ua import Connection 
+
 from pysondb import db
 import array
 
@@ -20,8 +22,7 @@ import numpy as np
 import openpyxl
 
 #My classes 
-from connection import Connection 
-from euromap import EuroMap63
+from euromap63_fanuc import EuroMap63
 from dataplot import Mygraph
 
 from monitoring_tabel import monitoring
@@ -42,14 +43,13 @@ customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "gre
 
 #Eu63 
 
-class App(customtkinter.CTk):
+class Connectinginterface(customtkinter.CTk):
     def __init__(self):
         super().__init__()
 
         # configure window
         self.title("Connectivity application")
         self.geometry(f"{1500}x{650}")
-        
 
         # Declare attribute done for OPCUA use
         self.done = ""
@@ -89,7 +89,6 @@ class App(customtkinter.CTk):
 
         # We can what is in the text box using functions like state="disabled"
 
-
         # create slider and progressbar frame
         self.slider_progressbar_frame = customtkinter.CTkFrame(self, fg_color="transparent")
         self.slider_progressbar_frame.grid(row=1, column=1, padx=(20, 0), pady=(20, 0), sticky="nsew")
@@ -97,8 +96,6 @@ class App(customtkinter.CTk):
         self.slider_progressbar_frame.grid_rowconfigure(4, weight=1)
 
         # We can add switches for every connection to give an feedback.
-
-      
 
         # Start the server 
         self.sidebar_button_1 = customtkinter.CTkButton(self.slider_progressbar_frame, text="Start the Server", command=self.establisched)
@@ -108,7 +105,7 @@ class App(customtkinter.CTk):
         self.sidebar_button_1.grid(row=1, column=2, padx=10, pady=10)
 
         # Start monitoring data
-        self.sidebar_button_1 = customtkinter.CTkButton(self.slider_progressbar_frame, text="Monitoring Data", command=self.monitoring)
+        # self.sidebar_button_1 = customtkinter.CTkButton(self.slider_progressbar_frame, text="Monitoring Data", command=self.monitoring)
         self.sidebar_button_1.grid(row=2, column=2, padx=10, pady=10)
       
         # create tabview
@@ -309,7 +306,6 @@ class App(customtkinter.CTk):
         
         overwirtetable(index)
 
-
     def addmachine_event(self):
         print("Adding an machine")
 
@@ -495,8 +491,20 @@ class App(customtkinter.CTk):
 
                                 plt.show()
 
+                                # Want to give an feedback about the data 
+                                # Only the first 15 values of the function
+                                self.textbox.insert("0.0","OPC UA machine data ")
+                                self.textbox.insert("0.0", " \n\n" * 2) # add on the end 
+
+                                for m in range(20):
+                                    # Show the first 30 data tpyes
+                                    # From the OPC ua connection: 
+                                    self.textbox.insert("0.0", dataframe.loc[m,:])
+                                    
                                 
-                                #self.progressbar_1.stop()
+                                
+
+
 
                             # Try OPC UA anonymous 
                             except: 
@@ -513,6 +521,7 @@ class App(customtkinter.CTk):
                                
                                 print("from main", dataframe)
                                 self.textbox.insert("0.0", "The OPC Ua connection with endpoint\n\n" + df.loc[ i ,"Endpoint"] + " is anonymous\n\n"  ) # add on the end
+                            
                                 # Mygraph.drawgraph(output, machineID, machineType
                                 #Mygraph.drawgraph(self, output, input_ds, i, "Arburg")
                                 
@@ -610,11 +619,8 @@ class App(customtkinter.CTk):
                 #serverStart = False
             
 
-          
-            
-
 if __name__ == "__main__":
-    app = App()
+    app = Connectinginterface()
     app.mainloop()
 
 # Woud be nice we can manage every connection we load an select if we wanna get data or not, like stop process or continue. 

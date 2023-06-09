@@ -11,49 +11,49 @@
 9,"none; Average injection pressure via stroke, reference value"
 10,"none; Average injection pressure via stroke, actual value"
 11,"none; Average injection pressure via stroke, tolerance"
-12,"1265.0; Maximum injection pressure, reference value"
-13,"1286.8134765625; Maximum injection pressure , actual value"
+12,"1700.0; Maximum injection pressure, reference value"
+13,"1731.169921875; Maximum injection pressure , actual value"
 14,"100.0; Maximum injection pressure, tolerance"
-15,"1265.0; Switch-over injection pressure, reference value"
-16,"1286.8134765625; Switch-over pressure , actual value"
+15,"1700.0; Switch-over injection pressure, reference value"
+16,"1731.169921875; Switch-over pressure , actual value"
 17,"100.0; Switch-over injection pressure, tolerance"
 18,none; Start of measurement
-19,7.171716690063477; End of measurement
-20,"6.800000190734863; Material cushion, reference value"
-21,"6.811575412750244; Material cushion , actual value"
+19,6.098974704742432; End of measurement
+20,"5.099999904632568; Material cushion, reference value"
+21,"4.931361675262451; Material cushion , actual value"
 22,"0.5; Material cushion, tolerance"
-23,7.96999979019165; value of the parameter
-24,"7.986482620239258; Switch-over stroke , actual value"
-25,"0.05000000074505806; Switch-over stroke, tolerance"
+23,8.0; value of the parameter
+24,"7.995509147644043; Switch-over stroke , actual value"
+25,"0.1257520616054535; Switch-over stroke, tolerance"
 26,"none; Injection start, reference value"
 27,"none; Injection start, actual value"
 28,"none; Injection start, tolerance"
 29,"none; Dosing time, reference value"
-30,"2.4240000247955322; Dosing time , actual value"
+30,"2.747999906539917; Dosing time , actual value"
 31,"1.0; Dosing time, tolerance"
 32,"0.5199999809265137; Injection time, reference value"
-33,"0.5199999809265137; Injection time , actual value"
+33,"0.5180000066757202; Injection time , actual value"
 34,"0.029999999329447746; Injection time, tolerance"
-35,"0.0; Variable injection time, reference value"
+35,"0.009999999776482582; Variable injection time, reference value"
 36,"0.0; Variable injection time, actual value"
-37,"0.10000000149011612; Variable injection time, tolerance"
-38,245.0; Cylinder heating zone 1
-39,"244.60000610351562; Cylinder heating zone 1, actual value"
+37,"0.009999999776482582; Variable injection time, tolerance"
+38,250.0; Cylinder heating zone 1
+39,"250.0; Cylinder heating zone 1, actual value"
 40,5.0; Tolerance of cylinder heating zone 1
-41,250.0; Cylinder heating zone 2
-42,"250.0; Cylinder heating zone 2, actual value"
+41,255.0; Cylinder heating zone 2
+42,"255.10000610351562; Cylinder heating zone 2, actual value"
 43,5.0; Tolerance of cylinder heating zone 2
-44,255.0; Cylinder heating zone 3
-45,"255.0; Cylinder heating zone 3, actual value"
+44,260.0; Cylinder heating zone 3
+45,"260.1000061035156; Cylinder heating zone 3, actual value"
 46,5.0; Tolerance of cylinder heating zone 3
 47,260.0; Cylinder heating zone 4
 48,"259.8999938964844; Cylinder heating zone 4, actual value"
 49,5.0; Tolerance of cylinder heating zone 4
-50,260.0; Cylinder heating zone 5
-51,"260.0; Cylinder heating zone 5, actual value"
+50,265.0; Cylinder heating zone 5
+51,"264.8999938964844; Cylinder heating zone 5, actual value"
 52,5.0; Tolerance of cylinder heating zone 5
 53,60.0; Temperature of feed yoke
-54,"58.0; Temperature of feed yoke, actual value"
+54,"58.900001525878906; Temperature of feed yoke, actual value"
 55,"5.0; Temperature of feed yoke, tolerance"
 56,"none; Cylinder temperature control unit 1, actual value"
 57,"none; Cylinder temperature control unit 2, actual value"

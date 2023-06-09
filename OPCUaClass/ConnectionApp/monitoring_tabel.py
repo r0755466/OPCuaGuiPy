@@ -11,15 +11,14 @@ from asyncua import Client, ua, Node
 from asyncua.client.ua_file import UaFile
 from IPython import embed
 from tabulate import tabulate
-from connection import Connection 
 from pysondb import db
 import array
 import pandas as pd
 import numpy as np 
 import openpyxl
 #Connection class, for multiple connections 
-from connection import Connection 
-from euromap import EuroMap63
+from opc_ua import Connection 
+from euromap63_fanuc import EuroMap63
 from dataplot import Mygraph
 import matplotlib.pyplot as plt
 # For the iamge 

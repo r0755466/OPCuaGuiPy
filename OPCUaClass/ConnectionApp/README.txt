@@ -60,6 +60,17 @@ monitoring data, individual buttons to see every machine we connected with, data
 
 
 
+#Features to add: 15/05 
+Need to fix some bugs about when does the graphs appear. 
+Show them in a picture ?
+
+#Sending the data to the cloud ?We send it like the Spark ? 
+Where do we send the data, we send it using MQTT ? like a broker? 
+One by one to the broker?
+
+
+
+
 
 
 
